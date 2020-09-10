@@ -42,6 +42,7 @@ jobs:
           npm update --save-dev --no-save
       - name: Releasing
         run: |
+          npm run bundle
           npm run release
         # Note: Setting NODE_AUTH_TOKEN as job|workspace wide env var won't work
         #       as it appears actions/setup-node sets own value
