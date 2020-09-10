@@ -1,6 +1,6 @@
 {
   "name": "@slsplus/coding",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI tool for coding.net",
   "main": "./dist/index.js",
   "bin": {
