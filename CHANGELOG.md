@@ -1,3 +1,10 @@
+## [0.1.2](https://github.com/serverless-plus/coding/compare/v0.1.1...v0.1.2) (2020-09-11)
+
+
+### Bug Fixes
+
+* add ci api for project build ([#2](https://github.com/serverless-plus/coding/issues/2)) ([dae1e00](https://github.com/serverless-plus/coding/commit/dae1e00e56e35624cfd9d458783ff712b46814d1))
+
 ## [0.1.1](https://github.com/serverless-plus/coding/compare/v0.1.0...v0.1.1) (2020-09-10)
 
 
