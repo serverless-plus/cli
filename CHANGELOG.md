@@ -1,3 +1,10 @@
+## [0.1.3](https://github.com/serverless-plus/coding/compare/v0.1.2...v0.1.3) (2020-09-11)
+
+
+### Bug Fixes
+
+* move ci reqs to api actions ([13e1334](https://github.com/serverless-plus/coding/commit/13e13343934f9154175bc9a4a5d710d5e23e581e))
+
 ## [0.1.2](https://github.com/serverless-plus/coding/compare/v0.1.1...v0.1.2) (2020-09-11)
 
 
