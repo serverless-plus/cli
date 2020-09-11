@@ -48,3 +48,7 @@ jobs:
         #       as it appears actions/setup-node sets own value
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # 01dd......71cc
+          GIT_AUTHOR_NAME: slsplus
+          GIT_AUTHOR_EMAIL: yuga.sun.bj@gmail.com
+          GIT_COMMITTER_NAME: slsplus
+          GIT_COMMITTER_EMAIL: yuga.sun.bj@gmail.com

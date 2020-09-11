@@ -1,5 +1,12 @@
 import { sleep } from '@ygkit/request';
 import { CodingCI } from '../src';
+import {
+  createProjectWithTemplateReq,
+  createCodingCIJobReq,
+  triggerCodingCIBuildReq,
+  describeCodingCIBuildStageReq,
+  describeCodingCIBuildLogReq,
+} from '../src/apis/actions';
 
 describe('Coding CI', () => {
   const ci = new CodingCI({
@@ -25,7 +32,7 @@ describe('Coding CI', () => {
   let buildId: number;
 
   it('[createProjectWithTemplateReq] should get right request data', async () => {
-    const req = CodingCI.createProjectWithTemplateReq({
+    const req = createProjectWithTemplateReq({
       name: 'coding-test',
       alias: 'coding-test',
       description: 'coding test',
@@ -60,7 +67,7 @@ describe('Coding CI', () => {
   });
 
   it('[createCodingCIJobReq] should get right request data', async () => {
-    const req = CodingCI.createCodingCIJobReq({
+    const req = createCodingCIJobReq({
       jobName: 'coding-test',
       projectId,
       envs: credentialEnvs,
@@ -101,7 +108,7 @@ describe('Coding CI', () => {
   });
 
   it('[triggerCodingCIBuildReq] should get right request data', async () => {
-    const req = CodingCI.triggerCodingCIBuildReq({
+    const req = triggerCodingCIBuildReq({
       jobId,
       envs: [
         {
@@ -143,7 +150,7 @@ describe('Coding CI', () => {
   });
 
   it('[describeCodingCIBuildStageReq] should get right request data', async () => {
-    const req = CodingCI.describeCodingCIBuildStageReq(buildId);
+    const req = describeCodingCIBuildStageReq(buildId);
     expect(req).toEqual({
       BuildId: buildId,
     });
@@ -162,7 +169,7 @@ describe('Coding CI', () => {
   });
 
   it('[describeCodingCIBuildLogReq] should get right request data using start default to 0', async () => {
-    const req = CodingCI.describeCodingCIBuildLogReq(buildId);
+    const req = describeCodingCIBuildLogReq(buildId);
     expect(req).toEqual({
       BuildId: buildId,
       Start: 0,
@@ -170,7 +177,7 @@ describe('Coding CI', () => {
   });
 
   it('[describeCodingCIBuildLogReq] should get right request data using config start', async () => {
-    const req = CodingCI.describeCodingCIBuildLogReq(buildId, 100);
+    const req = describeCodingCIBuildLogReq(buildId, 100);
     expect(req).toEqual({
       BuildId: buildId,
       Start: 100,
