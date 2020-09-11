@@ -1,12 +1,11 @@
-import { Environments } from '../typings/ci-interfaces';
+import { Environments, PipelineInterface, StagesInterface } from '../typings/ci-interfaces';
 import { Stages } from './stages';
 
-class Pipeline {
-  tab: string = '';
-  options = {};
-  stages: Stages | null;
+class Pipeline implements PipelineInterface {
+  tab: string;
+  stages: StagesInterface | null;
   environments: Environments;
-  agent: string = 'any';
+  agent: string;
 
   constructor() {
     this.tab = '';
@@ -15,16 +14,16 @@ class Pipeline {
     this.agent = 'any';
   }
 
-  addEnvironment(name: string, val: any) {
+  addEnvironment(name: string, val: string): void {
     this.environments[name] = val;
   }
 
-  addStages() {
+  addStages(): StagesInterface {
     this.stages = new Stages(this.tab);
     return this.stages;
   }
 
-  toString() {
+  toString(): string {
     if (!this.stages) {
       return `pipeline {}`;
     }

@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  extends: ['prettier'],
+  extends: ['prettier', 'plugin:@typescript-eslint/recommended', 'prettier/@typescript-eslint'],
   plugins: ['prettier', '@typescript-eslint'],
   env: {
     es6: true,
@@ -42,6 +42,7 @@ module.exports = {
         exceptions: ['e', 'i', 'n', 't', 'x', 'y', 'z', '_', '$'],
       },
     ],
+    '@typescript-eslint/no-explicit-any': 'off',
     'no-alert': 'error',
     'no-console': 'off',
     'no-const-assign': 'error',
@@ -67,6 +68,5 @@ module.exports = {
     semi: ['error', 'always'],
     'spaced-comment': 'error',
     strict: ['error', 'global'],
-    'prettier/prettier': 'error',
   },
 };

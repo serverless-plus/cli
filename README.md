@@ -48,6 +48,18 @@ support type：
 
 Most of time, we just use `feat` and `fix`.
 
+## Test
+
+For CI test, should copy `.env.example` to `.env.test`, then config below environment variables to yours:
+
+```dotenv
+TENCENT_SECRET_ID=xxx
+TENCENT_SECRET_KEY=xxx
+CODE_URL_COS=xxx
+```
+
+> Notice: `CODE_URL_COS` is a cos url for project code download in CI environment.
+
 ## License
 
 MIT

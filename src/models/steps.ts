@@ -1,28 +1,30 @@
-class Steps {
+import { StepsInterface } from '../typings/ci-interfaces';
+
+class Steps implements StepsInterface {
   shells: string[];
   tab: string;
   script: string | null;
-  constructor(...args: any) {
+  constructor(name: string) {
     this.shells = [];
-    if (args.length) {
-      const idx = args.length - 1;
-      this.tab = `${args[idx]}  `;
+    if (name) {
+      this.tab = `${name}  `;
     } else {
       this.tab = '  ';
     }
     this.script = null;
   }
 
-  addScriptCode(c: string) {
+  addScriptCode(c: string): boolean {
     this.script = c;
+    return true;
   }
 
-  addShell(s: string) {
+  addShell(s: string): boolean {
     this.shells.push(s);
     return true;
   }
 
-  toString() {
+  toString(): string {
     const size = this.shells.length;
     let result = `${this.tab}steps {\n`;
     for (let i = 0; i < size; i++) {

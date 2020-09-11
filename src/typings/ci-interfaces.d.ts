@@ -1,5 +1,47 @@
 export interface Environments {
-  [propName: string]: any;
+  [propName: string]: string;
+}
+
+export interface StepsInterface {
+  shells: string[];
+  tab: string;
+  script: string | null;
+
+  addScriptCode: (s: string) => boolean;
+  addShell: (s: string) => boolean;
+  toString: () => string;
+}
+
+export interface StageInterface {
+  tab: string;
+  name: string;
+  steps: StepsInterface | null;
+  environments: Environments;
+
+  // eslint-disable-next-line
+  addEnvironment: (name: string, val: string) => void;
+  addSteps: () => StepsInterface;
+  toString: () => string;
+}
+
+export interface StagesInterface {
+  tab: string;
+  stages: StageInterface[];
+
+  // eslint-disable-next-line
+  addStage: (n: string) => StageInterface;
+  toString: () => string;
+}
+export interface PipelineInterface {
+  tab: string;
+  stages: StagesInterface | null;
+  environments: Environments;
+  agent: string;
+
+  // eslint-disable-next-line
+  addEnvironment: (name: string, val: string) => void;
+  addStages: () => StagesInterface;
+  toString: () => string;
 }
 
 export interface CodingCIJobCachePath {
@@ -82,10 +124,11 @@ export interface CreateProjectReqOptions {
   label?: string;
 }
 
-export interface CreateProjectOptions {
+// ciInstance.createProjectWithTemplate options
+export interface CreateProjectWithTemplateOptions {
   name: string;
   alias: string;
-  description: string;
+  description?: string;
   options?: CreateProjectReqOptions;
 }
 
@@ -128,13 +171,92 @@ export interface CreateProjectRequest {
 }
 
 /* *******************************
+ * @api CreateProjectWithTemplateRequest
+ */
+export interface CreateProjectWithTemplateRequest {
+  /**
+   * 项目标识
+   */
+  Name: string | null;
+
+  /**
+   * 项目名称
+   */
+  DisplayName: string | null;
+
+  /**
+   * 启用 README.md 文件初始化项目 true|false
+   */
+  GitReadmeEnabled: boolean | null;
+
+  /**
+   * git｜svn｜hg
+   */
+  VcsType: string | null;
+
+  /**
+   * 是否创建 SVN 仓库推荐布局 默认false
+   */
+  CreateSvnLayout: boolean | null;
+
+  /**
+   * 0： 不公开 1：公开源代码
+   */
+  Shared: number | null;
+
+  /**
+   * 项目模版 CODE_HOST 代码托管项目， PROJECT_MANAGE 项目管理项目， DEV_OPS DevOps项目， DEMO_BEGIN 范例项目
+   */
+  ProjectTemplate: string | null;
+
+  /**
+   * 标签(TKE、TCB)
+   */
+  Label: string | null;
+
+  /**
+   * 隐藏项目在 CODING 入口不可见  true 不可见|false 可见
+   */
+  Invisible: boolean | null;
+
+  /**
+   * 项目描述
+   */
+  Description: string | null;
+
+  /**
+   * 项目图标
+   */
+  Icon: string | null;
+
+  /**
+   * git ignore 文件类型
+   */
+  GitIgnore: string | null;
+}
+
+export interface CreateProjectWithTemplateResponse {
+  /**
+   * 项目Id
+   */
+  ProjectId: number;
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId: string;
+}
+
+/* *******************************
  * @api CreateCodingCIJob
  */
 export interface CreateCodingCIJobOptions {
   jobName: string;
   projectId: number;
   depotId?: number;
-  envs?: Environments;
+  envs?: CIJobEnv[];
+  // for customizing pipeline
+  pipeline?: PipelineInterface;
 }
 
 export interface CreateCodingCIJobRequest {
@@ -248,12 +370,30 @@ export interface CreateCodingCIJobRequest {
   BuildFailUserIdList: Array<number>;
 }
 
+export interface CreateCodingCIJobData {
+  /**
+   * 构建计划 Id
+   */
+  Id: number;
+}
+
+export interface CreateCodingCIJobResponse {
+  /**
+   * 创建构建计划返回结构
+   */
+  Data: CreateCodingCIJobData;
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId: string;
+}
 /* *******************************
  * @api TriggerCodingCIBuild
  */
-export interface TriggerCodingCIJobBuildOptions {
+export interface TriggerCodingCIBuildOptions {
   jobId: number;
-  envs: Environments;
+  envs: CIJobEnv[];
 }
 export interface TriggerCodingCIBuildRequest {
   /**
@@ -272,12 +412,154 @@ export interface TriggerCodingCIBuildRequest {
   ParamList: CIJobEnv[];
 }
 
+export interface CIBuildTestResult {
+  /**
+   * 是否空
+   */
+  Empty: boolean;
+
+  /**
+   * 失败次数
+   */
+  FailCount: number;
+
+  /**
+   * 通过次数
+   */
+  PassCount: number;
+
+  /**
+   * 跳过次数
+   */
+  SkipCount: number;
+
+  /**
+   * 总次数
+   */
+  TotalCount: number;
+
+  /**
+   * 时长
+   */
+  Duration: number;
+}
+
+export interface CodingCIBuild {
+  /**
+   * 构建 ID
+   */
+  Id: number;
+
+  /**
+   * 构建计划 ID
+   */
+  JobId: number;
+
+  /**
+   * 构建唯一标识
+   */
+  CodingCIId: string;
+
+  /**
+   * 构建序号
+   */
+  Number: number;
+
+  /**
+   * Git Commit ID
+   */
+  CommitId: string;
+
+  /**
+   * 触发原因
+   */
+  Cause: string;
+
+  /**
+   * 分支
+   */
+  Branch: string;
+
+  /**
+   * 失败原因
+   */
+  FailedMessage: string;
+
+  /**
+   * 本次构建的 Jenkinsfile
+   */
+  JenkinsFileContent: string;
+
+  /**
+   * 构建执行时间 QUEUED  等待构建 INITIALIZING  初始化 NOT_BUILT  准备构建 RUNNING  运行中 SUCCEED  成功 FAILED  失败 ABORTED  被取消 TIMEOUT  超时
+   */
+  Duration: number;
+
+  /**
+   * 构建当前状态
+   */
+  Status: string;
+
+  /**
+   * 构建进行到了哪个 stage/node
+   */
+  StatusNode: string;
+
+  /**
+   * 构建创建时间
+   */
+  CreatedAt: number;
+
+  /**
+   * 测试结果
+   */
+  TestResult: CIBuildTestResult;
+}
+
+export interface TriggerCodingCIBuildData {
+  /**
+   * 构建信息
+   */
+  Build: CodingCIBuild;
+}
+
+export interface TriggerCodingCIBuildResponse {
+  /**
+   * 构建信息
+   */
+  Data: TriggerCodingCIBuildData;
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId: string;
+}
+
 /* *******************************
  * @api DescribeCodingCIBuildStage
  */
 export interface DescribeCodingCIBuildStageRequest {
   // 构建 ID
   BuildId: number;
+}
+
+export interface CodingCIBuildStageData {
+  /**
+   * Stage 返回字符串
+   */
+  StageJsonString: string;
+}
+
+export interface DescribeCodingCIBuildStageResponse {
+  /**
+   * 包含步骤返回信息
+   */
+  Data: CodingCIBuildStageData;
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId: string;
 }
 
 /* *******************************
@@ -293,4 +575,79 @@ export interface DescribeCodingCIBuildLogRequest {
    * 日志的开始位置
    */
   Start: number;
+}
+
+export interface DescribeCodingCIBuildLogData {
+  /**
+   * 日志
+   */
+  Log: string;
+
+  /**
+   * 是否有更多的日志
+   */
+  MoreData: boolean;
+
+  /**
+   * 当前展示日志长度
+   */
+  TextDelivered: number;
+
+  /**
+   * 总日志长度
+   */
+  TextSize: number;
+}
+
+export interface DescribeCodingCIBuildLogResponse {
+  /**
+   * 日志信息
+   */
+  Data: DescribeCodingCIBuildLogData;
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId: string;
+}
+
+export interface CodingCIOptions {
+  secretId: string;
+  secretKey: string;
+  token?: string;
+  region?: string;
+}
+
+export interface CodingCIInterface {
+  /* *********************************
+   * @api CreateCodingCIJob
+   */
+  createProjectWithTemplate: (
+    options: CreateProjectWithTemplateOptions,
+  ) => Promise<CreateProjectWithTemplateResponse>;
+
+  /* *********************************
+   * @api TriggerCodingCIJobBuild
+   */
+  createCodingCIJob: (options: CreateCodingCIJobOptions) => Promise<CreateCodingCIJobResponse>;
+
+  /* *********************************
+   * @api TriggerCodingCIJobBuild
+   */
+  triggerCodingCIBuild: (
+    options: TriggerCodingCIBuildOptions,
+  ) => Promise<TriggerCodingCIBuildResponse>;
+
+  /* *********************************
+   * @api DescribeCodingCIBuildStage
+   */
+  describeCodingCIBuildStage: (buildId: number) => Promise<DescribeCodingCIBuildStageResponse>;
+
+  /* *********************************
+   * @api DescribeCodingCIBuildLog
+   */
+  describeCodingCIBuildLog: (
+    buildId: number,
+    start: number,
+  ) => Promise<DescribeCodingCIBuildLogResponse>;
 }

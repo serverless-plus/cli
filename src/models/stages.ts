@@ -1,25 +1,29 @@
 import { Steps } from './steps';
-import { Environments } from '../typings/ci-interfaces';
+import {
+  Environments,
+  StageInterface,
+  StagesInterface,
+  StepsInterface,
+} from '../typings/ci-interfaces';
 
-class Stage {
+class Stage implements StageInterface {
   tab: string;
   name: string;
-  steps: Steps | null;
+  steps: StepsInterface | null;
   environments: Environments = {};
 
-  constructor(name: string, ...args: any) {
+  constructor(name: string, tab: string) {
     this.name = name;
     this.steps = null;
     this.environments = {};
-    if (args.length) {
-      const idx = args.length - 1;
-      this.tab = `${args[idx]}  `;
+    if (tab) {
+      this.tab = `${tab}  `;
     } else {
       this.tab = '  ';
     }
   }
 
-  addEnvironment(name: string, val: any) {
+  addEnvironment(name: string, val: string): void {
     this.environments[name] = val;
   }
 
@@ -48,27 +52,26 @@ class Stage {
   }
 }
 
-class Stages {
+class Stages implements StagesInterface {
   tab: string;
   stages: Stage[];
 
-  constructor(...args: any) {
+  constructor(name: string) {
     this.stages = [];
-    if (args.length) {
-      const idx = args.length - 1;
-      this.tab = `${args[idx]}  `;
+    if (name) {
+      this.tab = `${name}  `;
     } else {
       this.tab = '  ';
     }
   }
 
-  addStage(name: string) {
+  addStage(name: string): StageInterface {
     const stage = new Stage(name, this.tab);
     this.stages.push(stage);
     return stage;
   }
 
-  toString() {
+  toString(): string {
     const size = this.stages.length;
     let result = `${this.tab}stages {\n`;
     for (let i = 0; i < size; i++) {
