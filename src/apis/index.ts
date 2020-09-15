@@ -29,7 +29,7 @@ async function request(capi: Capi, options: RequestOptions): Promise<any | ApiEr
   try {
     const reqData = cleanEmptyValue(options) as RequestData;
     const res = await capi.request(reqData, {
-      isV3: true,
+      isV3: false,
       debug: false,
       host: 'coding.tencentcloudapi.com',
       RequestClient: 'slsplus_coding',

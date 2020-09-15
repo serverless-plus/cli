@@ -257,6 +257,8 @@ export interface CreateCodingCIJobOptions {
   envs?: CIJobEnv[];
   // for customizing pipeline
   pipeline?: PipelineInterface;
+  // 是否使用 CI 提供的临时密钥作为鉴权信息，默认为 false
+  useCITemp?: boolean;
 }
 
 export interface CreateCodingCIJobRequest {

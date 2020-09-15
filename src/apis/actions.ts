@@ -47,6 +47,7 @@ function createCodingCIJobReq({
   depotId,
   envs = [],
   pipeline,
+  useCITemp = false,
 }: CreateCodingCIJobOptions): CreateCodingCIJobRequest {
   if (!pipeline) {
     pipeline = new Pipeline();
@@ -56,9 +57,16 @@ function createCodingCIJobReq({
     let steps = stage.addSteps();
     steps.addShell('env');
     steps.addShell('date');
-    steps.addShell('echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID > .env');
-    steps.addShell('echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env');
-    steps.addShell('echo TENCENT_TOKEN=$TENCENT_TOKEN >> .env');
+    if (useCITemp) {
+      steps.addShell('echo TENCENT_SECRET_ID=$TENCENT_TEMP_SECRET_ID > .env');
+      steps.addShell('echo TENCENT_SECRET_KEY=$TENCENT_TEMP_SECRET_KEY >> .env');
+      steps.addShell('echo TENCENT_TOKEN=$TENCENT_TEMP_TOKEN >> .env');
+    } else {
+      steps.addShell('echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID > .env');
+      steps.addShell('echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env');
+      steps.addShell('echo TENCENT_TOKEN=$TENCENT_TOKEN >> .env');
+    }
+
     steps.addShell('echo SERVERLESS_PLATFORM_VENDOR=tencent >> .env');
     steps.addShell('echo SERVERLESS_PLATFORM_STAGE=$SERVERLESS_PLATFORM_STAGE >> .env');
 
