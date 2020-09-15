@@ -1,3 +1,10 @@
+## [0.1.4](https://github.com/serverless-plus/coding/compare/v0.1.3...v0.1.4) (2020-09-15)
+
+
+### Bug Fixes
+
+* add useCITemp option ([37f0d67](https://github.com/serverless-plus/coding/commit/37f0d6745e5676022dd03140e9582248cde47b63))
+
 ## [0.1.3](https://github.com/serverless-plus/coding/compare/v0.1.2...v0.1.3) (2020-09-11)
 
 
