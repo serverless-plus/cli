@@ -251,14 +251,18 @@ export interface CreateProjectWithTemplateResponse {
  * @api CreateCodingCIJob
  */
 export interface CreateCodingCIJobOptions {
+  // 构建计划名称
   jobName: string;
+  // 项目 ID
   projectId: number;
+  //  仓库 ID
   depotId?: number;
+  // 环境变量
   envs?: CIJobEnv[];
-  // for customizing pipeline
+  // 自定义 pipeline
   pipeline?: PipelineInterface;
   // 是否使用 CI 提供的临时密钥作为鉴权信息，默认为 false
-  useCITemp?: boolean;
+  useCITempAuth?: boolean;
 }
 
 export interface CreateCodingCIJobRequest {

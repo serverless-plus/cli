@@ -47,7 +47,7 @@ function createCodingCIJobReq({
   depotId,
   envs = [],
   pipeline,
-  useCITemp = false,
+  useCITempAuth = false,
 }: CreateCodingCIJobOptions): CreateCodingCIJobRequest {
   if (!pipeline) {
     pipeline = new Pipeline();
@@ -57,7 +57,7 @@ function createCodingCIJobReq({
     let steps = stage.addSteps();
     steps.addShell('env');
     steps.addShell('date');
-    if (useCITemp) {
+    if (useCITempAuth) {
       steps.addShell('echo TENCENT_SECRET_ID=$TENCENT_TEMP_SECRET_ID > .env');
       steps.addShell('echo TENCENT_SECRET_KEY=$TENCENT_TEMP_SECRET_KEY >> .env');
       steps.addShell('echo TENCENT_TOKEN=$TENCENT_TEMP_TOKEN >> .env');
