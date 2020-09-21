@@ -1,4 +1,4 @@
-import { StepsInterface } from '../typings/ci-interfaces';
+import { StepsInterface } from '../typings/ci';
 
 class Steps implements StepsInterface {
   shells: string[];

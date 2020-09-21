@@ -22,8 +22,8 @@
     "noUnusedLocals": true,
     "strict": true,
     "target": "es5",
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist"
   },
-  "include": ["src", "typings/**/*.d.ts"]
+  "include": ["src", "src/typings/**/*.d.ts", "./package.json"]
 }

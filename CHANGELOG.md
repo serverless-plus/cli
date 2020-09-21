@@ -1,41 +1,41 @@
-## [0.1.5](https://github.com/serverless-plus/coding/compare/v0.1.4...v0.1.5) (2020-09-21)
+## [0.1.5](https://github.com/serverless-plus/cli/compare/v0.1.4...v0.1.5) (2020-09-21)
 
 
 ### Bug Fixes
 
-* change useCITemp to useCITempAuth ([3d8ec23](https://github.com/serverless-plus/coding/commit/3d8ec233f956630887404ec177bce5ae2a5acfaa))
+* change useCITemp to useCITempAuth ([3d8ec23](https://github.com/serverless-plus/cli/commit/3d8ec233f956630887404ec177bce5ae2a5acfaa))
 
-## [0.1.4](https://github.com/serverless-plus/coding/compare/v0.1.3...v0.1.4) (2020-09-15)
-
-
-### Bug Fixes
-
-* add useCITemp option ([37f0d67](https://github.com/serverless-plus/coding/commit/37f0d6745e5676022dd03140e9582248cde47b63))
-
-## [0.1.3](https://github.com/serverless-plus/coding/compare/v0.1.2...v0.1.3) (2020-09-11)
+## [0.1.4](https://github.com/serverless-plus/cli/compare/v0.1.3...v0.1.4) (2020-09-15)
 
 
 ### Bug Fixes
 
-* move ci reqs to api actions ([13e1334](https://github.com/serverless-plus/coding/commit/13e13343934f9154175bc9a4a5d710d5e23e581e))
+* add useCITemp option ([37f0d67](https://github.com/serverless-plus/cli/commit/37f0d6745e5676022dd03140e9582248cde47b63))
 
-## [0.1.2](https://github.com/serverless-plus/coding/compare/v0.1.1...v0.1.2) (2020-09-11)
-
-
-### Bug Fixes
-
-* add ci api for project build ([#2](https://github.com/serverless-plus/coding/issues/2)) ([dae1e00](https://github.com/serverless-plus/coding/commit/dae1e00e56e35624cfd9d458783ff712b46814d1))
-
-## [0.1.1](https://github.com/serverless-plus/coding/compare/v0.1.0...v0.1.1) (2020-09-10)
+## [0.1.3](https://github.com/serverless-plus/cli/compare/v0.1.2...v0.1.3) (2020-09-11)
 
 
 ### Bug Fixes
 
-* release ci ([7f100c0](https://github.com/serverless-plus/coding/commit/7f100c03633d99de9caaa8bbe9f8ad756d8831b8))
+* move ci reqs to api actions ([13e1334](https://github.com/serverless-plus/cli/commit/13e13343934f9154175bc9a4a5d710d5e23e581e))
 
-# [0.1.0](https://github.com/serverless-plus/coding/compare/v0.0.1...v0.1.0) (2020-09-10)
+## [0.1.2](https://github.com/serverless-plus/cli/compare/v0.1.1...v0.1.2) (2020-09-11)
+
+
+### Bug Fixes
+
+* add ci api for project build ([#2](https://github.com/serverless-plus/cli/issues/2)) ([dae1e00](https://github.com/serverless-plus/cli/commit/dae1e00e56e35624cfd9d458783ff712b46814d1))
+
+## [0.1.1](https://github.com/serverless-plus/cli/compare/v0.1.0...v0.1.1) (2020-09-10)
+
+
+### Bug Fixes
+
+* release ci ([7f100c0](https://github.com/serverless-plus/cli/commit/7f100c03633d99de9caaa8bbe9f8ad756d8831b8))
+
+# [0.1.0](https://github.com/serverless-plus/cli/compare/v0.0.1...v0.1.0) (2020-09-10)
 
 
 ### Features
 
-* init project ([177de09](https://github.com/serverless-plus/coding/commit/177de09a1f746bf835541b9dcedb3ba56fdfd472))
+* init project ([177de09](https://github.com/serverless-plus/cli/commit/177de09a1f746bf835541b9dcedb3ba56fdfd472))

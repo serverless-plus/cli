@@ -1,11 +1,11 @@
-# Coding CLI
+# Serverless Plus CLI
 
-[![npm](https://img.shields.io/npm/v/@slsplus/coding)](http://www.npmtrends.com/@slsplus/coding)
-[![NPM downloads](http://img.shields.io/npm/dm/@slsplus/coding.svg?style=flat-square)](http://www.npmtrends.com/@slsplus/coding)
-[![Build Status](https://github.com/serverless-plus/coding/workflows/Release/badge.svg?branch=master)](https://github.com/serverless-plus/coding/actions?query=workflow:Release+branch:master)
+[![npm](https://img.shields.io/npm/v/@slsplus/cli)](http://www.npmtrends.com/@slsplus/cli)
+[![NPM downloads](http://img.shields.io/npm/dm/@slsplus/cli.svg?style=flat-square)](http://www.npmtrends.com/@slsplus/cli)
+[![Build Status](https://github.com/serverless-plus/cli/workflows/Release/badge.svg?branch=master)](https://github.com/serverless-plus/cli/actions?query=workflow:Release+branch:master)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-CLI tool for https://coding.net
+CLI tool for Serverless Plus
 
 ## Features
 
@@ -19,9 +19,52 @@ CLI tool for https://coding.net
 ## Usage
 
 ```bash
-$ npm i @slsplus/coding
-$ coding -h
+$ npm i @slsplus/cli -g
+$ slsplus -h
 ```
+
+### Clone project
+
+```bash
+$ slsplus clone https://github.com/serverless-plus/cli
+```
+
+### Parse serverless config file
+
+```bash
+$ slsplus parse -o -rv '{"src":"./"}'
+```
+
+Parse command will parse serverless config file with costomize and environment variables replacement.
+
+For example, before is:
+
+```yaml
+inputs:
+  src:
+    src: ./
+    exclude:
+      - .env
+  region: ${env:REGION}
+  apigatewayConf:
+    protocols:
+      - http
+      - https
+```
+
+If `process.env.REGION=ap-guangzhou`, after parsing, the `serverless.yml` will be:
+
+```yaml
+inputs:
+  src: ./
+  region: ap-guangzhou
+  apigatewayConf:
+    protocols:
+      - http
+      - https
+```
+
+> Notice: if you don't pass `-o` option, serverless.yml will not be rewrite, the parse result will just be outputed to terminal.
 
 ## Environment
 

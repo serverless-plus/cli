@@ -1,10 +1,5 @@
 import { Steps } from './steps';
-import {
-  Environments,
-  StageInterface,
-  StagesInterface,
-  StepsInterface,
-} from '../typings/ci-interfaces';
+import { Environments, StageInterface, StagesInterface, StepsInterface } from '../typings/ci';
 
 class Stage implements StageInterface {
   tab: string;

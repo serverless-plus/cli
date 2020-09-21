@@ -7,7 +7,7 @@ import {
   CreateProjectWithTemplateOptions,
   CreateCodingCIJobOptions,
   TriggerCodingCIBuildOptions,
-} from '../typings/ci-interfaces';
+} from '../typings/ci';
 
 import { Pipeline } from '../models/pipeline';
 
@@ -48,6 +48,7 @@ function createCodingCIJobReq({
   envs = [],
   pipeline,
   useCITempAuth = false,
+  parseOptions,
 }: CreateCodingCIJobOptions): CreateCodingCIJobRequest {
   if (!pipeline) {
     pipeline = new Pipeline();
@@ -73,11 +74,11 @@ function createCodingCIJobReq({
     steps.addShell(NPM_INSTALL_SHELL);
     steps.addShell('cat npm.sh && ls -la');
 
-    stage = stages.addStage('Installing serverless cli');
+    stage = stages.addStage('Installing serverless and slsplus cli');
     steps = stage.addSteps();
     steps.addShell('npm config ls');
     steps.addShell('npm set registry https://registry.npmjs.org/');
-    steps.addShell('npm install -g serverless');
+    steps.addShell('npm install -g serverless @slsplus/cli');
     steps.addShell('sls -v');
 
     stage = stages.addStage('Downloading code');
@@ -85,6 +86,13 @@ function createCodingCIJobReq({
     steps.addShell('wget $CODE_URL_COS -O code.zip');
     steps.addShell('ls -l && file code.zip');
     steps.addShell('unzip -n code.zip');
+
+    // whether need parse serverless.yml to source values config
+    if (parseOptions) {
+      stage = stages.addStage('Parsing serverless.yml to source values');
+      steps = stage.addSteps();
+      steps.addShell(`slsplus parse --output --replace-vars='${parseOptions.replaceVars}'`);
+    }
 
     stage = stages.addStage('Deploying Serverless project');
     steps = stage.addSteps();

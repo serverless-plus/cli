@@ -247,6 +247,10 @@ export interface CreateProjectWithTemplateResponse {
   RequestId: string;
 }
 
+export interface CIParseOptions {
+  replaceVars?: string;
+}
+
 /* *******************************
  * @api CreateCodingCIJob
  */
@@ -263,6 +267,8 @@ export interface CreateCodingCIJobOptions {
   pipeline?: PipelineInterface;
   // 是否使用 CI 提供的临时密钥作为鉴权信息，默认为 false
   useCITempAuth?: boolean;
+  // 将 serverless.yml 解析成真实值配置相关配置，包括需要定制化配置和环境变量
+  parseOptions?: CIParseOptions | null;
 }
 
 export interface CreateCodingCIJobRequest {

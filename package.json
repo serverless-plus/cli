@@ -1,10 +1,11 @@
 {
-  "name": "@slsplus/coding",
+  "name": "@slsplus/cli",
   "version": "0.1.5",
-  "description": "CLI tool for coding.net",
+  "description": "Serverless Plus CLI tool",
   "main": "./dist/index.js",
   "bin": {
-    "coding": "bin/coding.js"
+    "slsplus": "dist/slsplus.js",
+    "sp": "bin/slsplus.js"
   },
   "publishConfig": {
     "access": "public"
@@ -50,10 +51,17 @@
   "license": "MIT",
   "dependencies": {
     "@tencent-sdk/capi": "^1.1.0",
+    "@types/fs-extra": "^9.0.1",
+    "@types/js-yaml": "^3.12.5",
     "@types/ora": "^3.2.0",
+    "@types/traverse": "^0.6.32",
     "@ygkit/request": "^0.1.1",
+    "chalk": "^4.1.0",
     "commander": "^6.1.0",
+    "fs-extra": "^9.0.1",
+    "js-yaml": "^3.14.0",
     "ora": "^5.1.0",
+    "traverse": "^0.6.6",
     "tslib": "^2.0.1"
   },
   "devDependencies": {
@@ -82,10 +90,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/serverless-plus/coding.git"
+    "url": "git+https://github.com/serverless-plus/cl.git"
   },
   "bugs": {
-    "url": "https://github.com/serverless-plus/coding/issues"
+    "url": "https://github.com/serverless-plus/cl/issues"
   },
-  "homepage": "https://github.com/serverless-plus/coding#readme"
+  "homepage": "https://github.com/serverless-plus/cl#readme"
 }

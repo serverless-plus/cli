@@ -3,6 +3,7 @@ require('dotenv').config({ path: join(__dirname, '.env.test') });
 
 const config = {
   verbose: true,
+  silent: true,
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
