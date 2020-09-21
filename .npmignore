@@ -2,4 +2,5 @@ node_modules
 *.map
 tsconfig.tsbuildinfo
 test
-src
+/src
+!/dist/src
