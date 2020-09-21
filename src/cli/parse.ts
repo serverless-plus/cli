@@ -86,7 +86,7 @@ export function parse({
   // if need write parse res back to config file
   if (output || outputPath) {
     const ext = getFileExt(inputPath);
-    let opPath = `serverless.${ext}`;
+    let opPath = resolve(rootDir, `serverless.${ext}`);
     if (outputPath) {
       opPath = resolve(rootDir, outputPath);
     }

@@ -93,7 +93,7 @@ inputs:
   for (let i = 0; i < extList.length; i++) {
     const ext = extList[i];
     const filename = `serverless.${ext}`;
-    const configFile = join('demo', filename);
+    const configFile = join(demoPath, filename);
 
     test(`should success parse ${filename} file`, async () => {
       const res = parse({
@@ -166,7 +166,7 @@ inputs:
 
     test(`should success parse ${filename} file, and output to current path`, async () => {
       const res = parse({
-        rootDir: __dirname,
+        rootDir: demoPath,
         input: configFile,
         output: true,
       });
@@ -187,7 +187,7 @@ inputs:
           },
         },
       });
-      expect(readAndParse(join(__dirname, configFile))).toEqual({
+      expect(readAndParse(configFile)).toEqual({
         data: {
           org: 'orgDemo',
           app: 'appDemo',
