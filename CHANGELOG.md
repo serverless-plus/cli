@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/serverless-plus/cli/compare/v0.2.0...v0.2.1) (2020-09-21)
+
+
+### Bug Fixes
+
+* npm ignore ([e4c06a9](https://github.com/serverless-plus/cli/commit/e4c06a9f66c9714ffb150278d1c57a9335d5a555))
+
 # [0.2.0](https://github.com/serverless-plus/cli/compare/v0.1.5...v0.2.0) (2020-09-21)
 
 
