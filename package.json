@@ -1,10 +1,10 @@
 {
-  "name": "@slsplus/clii",
+  "name": "@slsplus/cli",
   "version": "0.2.0",
   "description": "Serverless Plus CLI tool",
-  "main": "./dist/index.js",
+  "main": "./dist/src/index.js",
   "bin": {
-    "slsplus": "dist/slsplus.js",
+    "slsplus": "bin/slsplus.js",
     "sp": "bin/slsplus.js"
   },
   "publishConfig": {

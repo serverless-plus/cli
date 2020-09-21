@@ -12,7 +12,7 @@ import {
   CreateProjectWithTemplateOptions,
   CreateCodingCIJobOptions,
   TriggerCodingCIBuildOptions,
-} from './typings/ci';
+} from './typings';
 import {
   createProjectWithTemplateReq,
   createCodingCIJobReq,
