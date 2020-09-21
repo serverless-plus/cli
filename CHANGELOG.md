@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/serverless-plus/cli/compare/v0.1.5...v0.2.0) (2020-09-21)
+
+
+### Features
+
+* change npm name to slsplus cli and add parse command ([7713df6](https://github.com/serverless-plus/cli/commit/7713df63f309e4c473a1c78f4e8dfb6dafed334d))
+
 ## [0.1.5](https://github.com/serverless-plus/cli/compare/v0.1.4...v0.1.5) (2020-09-21)
 
 
