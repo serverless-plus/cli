@@ -1,5 +1,5 @@
 {
-  "name": "@slsplus/cli",
+  "name": "@slsplus/clii",
   "version": "0.1.5",
   "description": "Serverless Plus CLI tool",
   "main": "./dist/index.js",
@@ -90,10 +90,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/serverless-plus/cl.git"
+    "url": "git+https://github.com/serverless-plus/cli.git"
   },
   "bugs": {
-    "url": "https://github.com/serverless-plus/cl/issues"
+    "url": "https://github.com/serverless-plus/cli/issues"
   },
-  "homepage": "https://github.com/serverless-plus/cl#readme"
+  "homepage": "https://github.com/serverless-plus/cli#readme"
 }
