@@ -1,3 +1,10 @@
+## [0.1.5](https://github.com/serverless-plus/coding/compare/v0.1.4...v0.1.5) (2020-09-21)
+
+
+### Bug Fixes
+
+* change useCITemp to useCITempAuth ([3d8ec23](https://github.com/serverless-plus/coding/commit/3d8ec233f956630887404ec177bce5ae2a5acfaa))
+
 ## [0.1.4](https://github.com/serverless-plus/coding/compare/v0.1.3...v0.1.4) (2020-09-15)
 
 
