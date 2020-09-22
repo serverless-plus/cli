@@ -1,3 +1,10 @@
+## [0.2.3](https://github.com/serverless-plus/cli/compare/v0.2.2...v0.2.3) (2020-09-22)
+
+
+### Bug Fixes
+
+* replace vars logical using Object.assign ([f9ee505](https://github.com/serverless-plus/cli/commit/f9ee505af28de89f17d2c662044b37aae22e66b1))
+
 ## [0.2.2](https://github.com/serverless-plus/cli/compare/v0.2.1...v0.2.2) (2020-09-22)
 
 
