@@ -31,6 +31,7 @@ async function run() {
       'output parse result to target serverless config file path',
     )
     .option('-r, --root [rootDir]', 'root directory for parse command running')
+    .option('-c, --auto-create', 'whether auto create serverless config file', false)
     .option('-rv, --replace-vars [replaceVars]', 'json string of variables need to be replaced')
     .action((options) => {
       parse({
@@ -39,6 +40,7 @@ async function run() {
         output: options.output,
         outputPath: options.outputPath,
         replaceVars: options.replaceVars,
+        autoCreate: options.autoCreate,
       });
     });
 

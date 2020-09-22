@@ -63,12 +63,14 @@ class CodingCI implements CodingCIInterface {
     projectId,
     depotId,
     envs = [],
+    parseOptions,
   }: CreateCodingCIJobOptions): Promise<CreateCodingCIJobResponse> {
     const req = createCodingCIJobReq({
       jobName,
       projectId,
       depotId,
       envs,
+      parseOptions,
     });
     const res = await request(this.capi, {
       Action: 'CreateCodingCIJob',

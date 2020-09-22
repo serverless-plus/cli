@@ -4,4 +4,5 @@ export interface ParseOptions {
   output?: boolean;
   outputPath?: string;
   replaceVars?: string;
+  autoCreate?: boolean;
 }

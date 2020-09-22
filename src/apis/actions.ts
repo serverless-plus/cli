@@ -78,7 +78,7 @@ function createCodingCIJobReq({
     steps = stage.addSteps();
     steps.addShell('npm config ls');
     steps.addShell('npm set registry https://registry.npmjs.org/');
-    steps.addShell('npm install -g serverless @slsplus/cli');
+    steps.addShell('npm install -g serverless');
     steps.addShell('sls -v');
 
     stage = stages.addStage('Downloading code');
@@ -91,7 +91,10 @@ function createCodingCIJobReq({
     if (parseOptions) {
       stage = stages.addStage('Parsing serverless.yml to source values');
       steps = stage.addSteps();
-      steps.addShell(`slsplus parse --output --replace-vars='${parseOptions.replaceVars}'`);
+      steps.addShell('npm install -g @slsplus/cli');
+      steps.addShell(
+        `slsplus parse --output --auto-create --replace-vars=\\\'${parseOptions.replaceVars}\\\' && cat serverless.yml`,
+      );
     }
 
     stage = stages.addStage('Deploying Serverless project');

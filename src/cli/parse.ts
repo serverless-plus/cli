@@ -43,10 +43,6 @@ const resolveVariables = (inputs: AnyObject): AnyObject => {
  * Reads a file on the file system
  */
 export const readAndParse = (filePath: string, options = {}): AnyObject => {
-  if (!fileExists(filePath)) {
-    throw new Error(`File does not exist at this path ${filePath}`);
-  }
-
   const contents = fse.readFileSync(filePath, 'utf8');
   let type = '';
   let res = {};
@@ -71,6 +67,7 @@ export function parse({
   input,
   output,
   outputPath,
+  autoCreate = false,
   replaceVars = '{}',
 }: ParseOptions): AnyObject {
   let inputPath = '';
@@ -80,7 +77,16 @@ export function parse({
     inputPath = resolve(rootDir, 'serverless.yml');
   }
 
-  const { data: parseObj, type } = readAndParse(inputPath);
+  if (!fileExists(inputPath)) {
+    if (autoCreate) {
+      const defaultContent = YAML.dump({ createdByCli: true });
+      fse.outputFileSync(inputPath, defaultContent);
+    } else {
+      throw new Error(`File does not exist at this path ${inputPath}`);
+    }
+  }
+
+  const { data: parseObj, type } = readAndParse(inputPath, autoCreate);
   const parseRes = mergeObject(parseObj, JSON.parse(replaceVars));
 
   // if need write parse res back to config file
