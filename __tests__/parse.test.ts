@@ -133,10 +133,6 @@ inputs:
         name: 'expressDemo',
         inputs: {
           src: './',
-          region: 'ap-guangzhou',
-          apigatewayConf: {
-            protocols: ['http', 'https'],
-          },
         },
       });
     });
@@ -156,10 +152,6 @@ inputs:
         inputs: {
           src: './',
           test: 1,
-          region: 'ap-guangzhou',
-          apigatewayConf: {
-            protocols: ['http', 'https'],
-          },
         },
       });
     });

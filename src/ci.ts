@@ -6,6 +6,7 @@ import {
   CreateCodingCIJobResponse,
   CreateProjectWithTemplateResponse,
   TriggerCodingCIBuildResponse,
+  DescribeCodingCIBuildResponse,
   DescribeCodingCIBuildStageResponse,
   DescribeCodingCIBuildLogResponse,
   CodingCIOptions,
@@ -17,6 +18,7 @@ import {
   createProjectWithTemplateReq,
   createCodingCIJobReq,
   triggerCodingCIBuildReq,
+  describeCodingCIBuildReq,
   describeCodingCIBuildStageReq,
   describeCodingCIBuildLogReq,
 } from './apis/actions';
@@ -89,6 +91,15 @@ class CodingCI implements CodingCIInterface {
     });
     const res = await request(this.capi, {
       Action: 'TriggerCodingCIBuild',
+      ...req,
+    });
+    return res;
+  }
+
+  async describeCodingCIBuild(buildId: number): Promise<DescribeCodingCIBuildResponse> {
+    const req = describeCodingCIBuildReq(buildId);
+    const res = await request(this.capi, {
+      Action: 'DescribeCodingCIBuild',
       ...req,
     });
     return res;

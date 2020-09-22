@@ -456,6 +456,15 @@ export interface CIBuildTestResult {
   Duration: number;
 }
 
+export type CIJobBuildStatus =
+  | 'QUEUED'
+  | 'INITIALIZING'
+  | 'NOT_BUILT'
+  | 'RUNNING'
+  | 'SUCCEED'
+  | 'FAILED'
+  | 'ABORTED';
+
 export interface CodingCIBuild {
   /**
    * 构建 ID
@@ -510,7 +519,7 @@ export interface CodingCIBuild {
   /**
    * 构建当前状态
    */
-  Status: string;
+  Status: CIJobBuildStatus;
 
   /**
    * 构建进行到了哪个 stage/node
@@ -630,6 +639,26 @@ export interface CodingCIOptions {
   region?: string;
 }
 
+/* *******************************
+ * @api DescribeCodingCIBuild
+ */
+export interface DescribeCodingCIBuildRequest {
+  // 构建 ID
+  BuildId: number;
+}
+
+export interface DescribeCodingCIBuildResponse {
+  /**
+   * 构建详情
+   */
+  Build: CodingCIBuild;
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId: string;
+}
+
 export interface CodingCIInterface {
   /* *********************************
    * @api CreateCodingCIJob
@@ -649,6 +678,11 @@ export interface CodingCIInterface {
   triggerCodingCIBuild: (
     options: TriggerCodingCIBuildOptions,
   ) => Promise<TriggerCodingCIBuildResponse>;
+
+  /* *********************************
+   * @api DescribeCodingCIBuild
+   */
+  describeCodingCIBuild: (buildId: number) => Promise<DescribeCodingCIBuildResponse>;
 
   /* *********************************
    * @api DescribeCodingCIBuildStage

@@ -2,6 +2,7 @@ import {
   CreateProjectWithTemplateRequest,
   CreateCodingCIJobRequest,
   TriggerCodingCIBuildRequest,
+  DescribeCodingCIBuildRequest,
   DescribeCodingCIBuildStageRequest,
   DescribeCodingCIBuildLogRequest,
   CreateProjectWithTemplateOptions,
@@ -154,6 +155,15 @@ function triggerCodingCIBuildReq({
 }
 
 /**
+ * generate DescribeCodingCIBuild request data
+ */
+function describeCodingCIBuildReq(buildId: number): DescribeCodingCIBuildRequest {
+  return {
+    BuildId: buildId,
+  };
+}
+
+/**
  * generate DescribeCodingCIBuildStage request data
  */
 function describeCodingCIBuildStageReq(buildId: number): DescribeCodingCIBuildStageRequest {
@@ -176,6 +186,7 @@ export {
   createProjectWithTemplateReq,
   createCodingCIJobReq,
   triggerCodingCIBuildReq,
+  describeCodingCIBuildReq,
   describeCodingCIBuildStageReq,
   describeCodingCIBuildLogReq,
 };

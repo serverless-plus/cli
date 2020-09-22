@@ -3,7 +3,7 @@ import fse from 'fs-extra';
 import YAML from 'js-yaml';
 import traverse from 'traverse';
 import chalk from 'chalk';
-import { fileExists, isJsonPath, isYamlPath, mergeObject, getFileExt } from '../utils';
+import { fileExists, isJsonPath, isYamlPath, getFileExt } from '../utils';
 import { AnyObject, ParseOptions } from '../typings';
 
 /**
@@ -87,7 +87,7 @@ export function parse({
   }
 
   const { data: parseObj, type } = readAndParse(inputPath, autoCreate);
-  const parseRes = mergeObject(parseObj, JSON.parse(replaceVars));
+  const parseRes = Object.assign(parseObj, JSON.parse(replaceVars));
 
   // if need write parse res back to config file
   if (output || outputPath) {

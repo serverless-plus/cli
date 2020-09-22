@@ -15,13 +15,18 @@ const isObject = (obj: any) => {
 
 const mergeObject = (source: AnyObject, target: AnyObject): AnyObject => {
   Object.entries(source).forEach(([key, val]) => {
-    if (isObject(val) && target[key]) {
-      target[key] = mergeObject(target[key], val);
-    } else {
-      target[key] = val;
+    if (isObject(val) && isObject(target[key]) && target[key]) {
+      source[key] = mergeObject(val, target[key]);
+    } else if (target[key]) {
+      source[key] = target[key];
     }
   });
-  return target;
+  Object.entries(target).forEach(([key, val]) => {
+    if (!source[key]) {
+      source[key] = val;
+    }
+  });
+  return source;
 };
 
 const endsWith = (suffix: string, str: any) => {

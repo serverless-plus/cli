@@ -126,7 +126,8 @@ describe('Coding CI', () => {
       projectId,
       envs: credentialEnvs,
       parseOptions: {
-        replaceVars: '{"test":1}',
+        replaceVars:
+          '{"org":"orgDemo","app":"appDemo","stage":"dev","component":"express","name":"expressDemo","inputs":{"src":{"src":"./","exclude":[".env"]},"apigatewayConf":{"protocols":["http","https"]}}}',
       },
     });
     expect(req).toEqual({
