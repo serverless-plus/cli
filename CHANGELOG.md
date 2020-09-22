@@ -1,3 +1,10 @@
+## [0.2.2](https://github.com/serverless-plus/cli/compare/v0.2.1...v0.2.2) (2020-09-22)
+
+
+### Bug Fixes
+
+* replace vars format error ([1243a27](https://github.com/serverless-plus/cli/commit/1243a27853b261228af46c7ccbc001e4cb119746))
+
 ## [0.2.1](https://github.com/serverless-plus/cli/compare/v0.2.0...v0.2.1) (2020-09-21)
 
 
