@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/serverless-plus/cli/compare/v0.3.0...v0.3.1) (2020-09-24)
+
+
+### Bug Fixes
+
+* optimize type definition ([7046041](https://github.com/serverless-plus/cli/commit/7046041a9bbfcd5c325780f453ae92d6ccae543e))
+
 # [0.3.0](https://github.com/serverless-plus/cli/compare/v0.2.3...v0.3.0) (2020-09-24)
 
 
