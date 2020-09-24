@@ -1,3 +1,15 @@
+# [0.3.0](https://github.com/serverless-plus/cli/compare/v0.2.3...v0.3.0) (2020-09-24)
+
+
+### Bug Fixes
+
+* ts bundle ([67a8ffd](https://github.com/serverless-plus/cli/commit/67a8ffd4be3dcad0351b996ab4a8687bd19bfe16))
+
+
+### Features
+
+* **parse:** support layer ([dd9d619](https://github.com/serverless-plus/cli/commit/dd9d619ed3d953d771d848de3734a5aa7d86d84a))
+
 ## [0.2.3](https://github.com/serverless-plus/cli/compare/v0.2.2...v0.2.3) (2020-09-22)
 
 
