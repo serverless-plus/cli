@@ -8,9 +8,9 @@ import {
   CreateProjectWithTemplateOptions,
   CreateCodingCIJobOptions,
   TriggerCodingCIBuildOptions,
-} from '../typings';
+} from '../typings/ci';
 
-import { Pipeline } from '../models/pipeline';
+import { Pipeline } from './models/pipeline';
 
 import { NPM_INSTALL_SHELL } from '../constants';
 
@@ -50,15 +50,18 @@ function createCodingCIJobReq({
   pipeline,
   useCITempAuth = false,
   parseOptions,
+  needDeployLayer = false,
 }: CreateCodingCIJobOptions): CreateCodingCIJobRequest {
   if (!pipeline) {
     pipeline = new Pipeline();
     const stages = pipeline.addStages();
 
+    // 1. initial environment variables
     let stage = stages.addStage('Initializing Node.js environment');
     let steps = stage.addSteps();
     steps.addShell('env');
     steps.addShell('date');
+    // 1.1 generate environment variables for serverless
     if (useCITempAuth) {
       steps.addShell('echo TENCENT_SECRET_ID=$TENCENT_TEMP_SECRET_ID > .env');
       steps.addShell('echo TENCENT_SECRET_KEY=$TENCENT_TEMP_SECRET_KEY >> .env');
@@ -68,13 +71,13 @@ function createCodingCIJobReq({
       steps.addShell('echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env');
       steps.addShell('echo TENCENT_TOKEN=$TENCENT_TOKEN >> .env');
     }
-
     steps.addShell('echo SERVERLESS_PLATFORM_VENDOR=tencent >> .env');
     steps.addShell('echo SERVERLESS_PLATFORM_STAGE=$SERVERLESS_PLATFORM_STAGE >> .env');
-
+    // 1.2 generate npm install shell, include install for sub dir
     steps.addShell(NPM_INSTALL_SHELL);
     steps.addShell('cat npm.sh && ls -la');
 
+    // 2. install serverless cli
     stage = stages.addStage('Installing serverless and slsplus cli');
     steps = stage.addSteps();
     steps.addShell('npm config ls');
@@ -82,25 +85,48 @@ function createCodingCIJobReq({
     steps.addShell('npm install -g serverless');
     steps.addShell('sls -v');
 
+    // 3. download code
     stage = stages.addStage('Downloading code');
     steps = stage.addSteps();
     steps.addShell('wget $CODE_URL_COS -O code.zip');
     steps.addShell('ls -l && file code.zip');
-    steps.addShell('unzip -n code.zip');
+    steps.addShell('unzip -n code.zip && rm code.zip');
 
+    // 4. install project dependencies
+    stage = stages.addStage('Install dependencies');
+    steps = stage.addSteps();
+    steps.addShell('chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh');
+
+    // 5. Processing serverless config files (optional)
     // whether need parse serverless.yml to source values config
     if (parseOptions) {
-      stage = stages.addStage('Parsing serverless.yml to source values');
+      stage = stages.addStage('Processing serverless config files');
       steps = stage.addSteps();
       steps.addShell('npm install -g @slsplus/cli');
-      steps.addShell(
-        `slsplus parse --output --auto-create --replace-vars=\\\'${parseOptions.replaceVars}\\\' && cat serverless.yml`,
-      );
+      if (parseOptions.slsOptions) {
+        steps.addShell(
+          `slsplus parse --output --auto-create --sls-options=\\\'${JSON.stringify(
+            parseOptions.slsOptions,
+          )}\\\' && cat serverless.yml`,
+        );
+      }
+      if (parseOptions.layerOptions) {
+        steps.addShell(
+          `slsplus parse --output --auto-create --layer-options=\\\'${JSON.stringify(
+            parseOptions.layerOptions,
+          )}\\\' && cat layer/serverless.yml`,
+        );
+      }
     }
 
+    // 6. deploy serverless project
     stage = stages.addStage('Deploying Serverless project');
     steps = stage.addSteps();
-    steps.addShell('chmod +x ./npm.sh && ./npm.sh `pwd`');
+    if (needDeployLayer) {
+      // 6.1 deploy layer (optional)
+      steps.addShell('serverless deploy --debug --target=./layer');
+    }
+    // 6.2 deploy project
     steps.addShell('serverless deploy --debug');
   } else {
     if (!(pipeline instanceof Pipeline)) {

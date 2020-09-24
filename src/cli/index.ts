@@ -31,15 +31,18 @@ async function run() {
       'output parse result to target serverless config file path',
     )
     .option('-r, --root [rootDir]', 'root directory for parse command running')
-    .option('-c, --auto-create', 'whether auto create serverless config file', false)
-    .option('-rv, --replace-vars [replaceVars]', 'json string of variables need to be replaced')
+    .option('-a, --auto-create', 'whether auto create serverless config file', false)
+    .option('-c, --component [component]', 'serverless component name')
+    .option('-s, --sls-options [slsOptions]', 'serverless config')
+    .option('-l, --layer-options [layerOptions]', 'serverless layer config')
     .action((options) => {
       parse({
         rootDir: options.rootDir,
         input: options.input,
         output: options.output,
         outputPath: options.outputPath,
-        replaceVars: options.replaceVars,
+        slsOptionsJson: options.slsOptions,
+        layerOptionsJson: options.layerOptions,
         autoCreate: options.autoCreate,
       });
     });

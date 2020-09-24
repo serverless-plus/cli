@@ -1,5 +1,3 @@
-// / <reference path="./typings/ci-interfaces.d.ts" />
-
 import { Capi } from '@tencent-sdk/capi';
 import {
   CodingCIInterface,
@@ -13,7 +11,7 @@ import {
   CreateProjectWithTemplateOptions,
   CreateCodingCIJobOptions,
   TriggerCodingCIBuildOptions,
-} from './typings';
+} from '../typings/ci';
 import {
   createProjectWithTemplateReq,
   createCodingCIJobReq,
@@ -21,9 +19,9 @@ import {
   describeCodingCIBuildReq,
   describeCodingCIBuildStageReq,
   describeCodingCIBuildLogReq,
-} from './apis/actions';
+} from './actions';
 
-import { request } from './apis';
+import { request } from '../apis';
 
 class CodingCI implements CodingCIInterface {
   capi: Capi;
@@ -66,6 +64,7 @@ class CodingCI implements CodingCIInterface {
     depotId,
     envs = [],
     parseOptions,
+    needDeployLayer,
   }: CreateCodingCIJobOptions): Promise<CreateCodingCIJobResponse> {
     const req = createCodingCIJobReq({
       jobName,
@@ -73,6 +72,7 @@ class CodingCI implements CodingCIInterface {
       depotId,
       envs,
       parseOptions,
+      needDeployLayer,
     });
     const res = await request(this.capi, {
       Action: 'CreateCodingCIJob',

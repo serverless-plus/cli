@@ -73,6 +73,7 @@ inputs:
   };
   const demoPath = join(__dirname, 'demo');
   const outputPath = join(__dirname, 'output');
+  const layerPath = join(__dirname, 'layer');
 
   beforeAll(() => {
     for (let i = 0; i < extList.length; i++) {
@@ -88,6 +89,7 @@ inputs:
   afterAll(() => {
     removeSync(demoPath);
     removeSync(outputPath);
+    removeSync(layerPath);
   });
 
   for (let i = 0; i < extList.length; i++) {
@@ -119,11 +121,11 @@ inputs:
       });
     });
 
-    test(`should success parse ${filename} file using replace json`, async () => {
+    test(`should success parse ${filename} file using slsOptions`, async () => {
       const res = parse({
         rootDir: __dirname,
         input: configFile,
-        replaceVars: '{"inputs":{"src":"./"}}',
+        slsOptionsJson: '{"inputs":{"src":"./"}}',
       });
       expect(res).toEqual({
         org: 'orgDemo',
@@ -137,11 +139,11 @@ inputs:
       });
     });
 
-    test(`should success parse ${filename} file using replace json with new property`, async () => {
+    test(`should success parse ${filename} file using slsOptions with new property`, async () => {
       const res = parse({
         rootDir: __dirname,
         input: configFile,
-        replaceVars: '{"inputs":{"src":"./","test":1}}',
+        slsOptionsJson: '{"inputs":{"src":"./","test":1}}',
       });
       expect(res).toEqual({
         org: 'orgDemo',
@@ -152,6 +154,37 @@ inputs:
         inputs: {
           src: './',
           test: 1,
+        },
+      });
+    });
+
+    test(`should success parse ${filename} file using layerOptions`, async () => {
+      const res = parse({
+        rootDir: __dirname,
+        input: configFile,
+        layerOptionsJson: '{"org":"orgDemo","app":"appDemo","stage":"dev","runtime":"Nodejs10.15"}',
+      });
+      expect(res).toEqual({
+        org: 'orgDemo',
+        app: 'appDemo',
+        stage: 'dev',
+        component: 'express',
+        name: 'expressDemo',
+        inputs: {
+          region: 'ap-guangzhou',
+          src: {
+            src: './',
+            exclude: ['.env'],
+          },
+          layers: [
+            {
+              name: '${output:${stage}:${app}:appDemo-layer.name}',
+              version: '${output:${stage}:${app}:appDemo-layer.version}',
+            },
+          ],
+          apigatewayConf: {
+            protocols: ['http', 'https'],
+          },
         },
       });
     });

@@ -1,3 +1,7 @@
+export interface AnyObject {
+  [prodName: string]: any;
+}
+
 export interface Environments {
   [propName: string]: string;
 }
@@ -248,12 +252,22 @@ export interface CreateProjectWithTemplateResponse {
 }
 
 export interface CIParseOptions {
-  replaceVars?: string;
+  slsOptions?: AnyObject;
+  layerOptions?: AnyObject;
 }
 
 /* *******************************
  * @api CreateCodingCIJob
  */
+
+export interface LayerOptions {
+  // 是否需要部署层，默认为 false 只在再次部署层时，是否更新层
+  needDeployLayer?: boolean;
+  org: string;
+  app: string;
+  stage: string;
+  runtime: string;
+}
 export interface CreateCodingCIJobOptions {
   // 构建计划名称
   jobName: string;
@@ -269,6 +283,8 @@ export interface CreateCodingCIJobOptions {
   useCITempAuth?: boolean;
   // 将 serverless.yml 解析成真实值配置相关配置，包括需要定制化配置和环境变量
   parseOptions?: CIParseOptions | null;
+  // 是否部署layer
+  needDeployLayer?: boolean;
 }
 
 export interface CreateCodingCIJobRequest {

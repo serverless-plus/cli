@@ -32,7 +32,7 @@ $ slsplus clone https://github.com/serverless-plus/cli
 ### Parse serverless config file
 
 ```bash
-$ slsplus parse -o -rv '{"src":"./"}'
+$ slsplus parse -o -s '{"src":"./"}'
 ```
 
 Parse command will parse serverless config file with costomize and environment variables replacement.

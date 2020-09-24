@@ -1,10 +1,12 @@
-import { resolve } from 'path';
+import { join, resolve } from 'path';
 import fse from 'fs-extra';
 import YAML from 'js-yaml';
 import traverse from 'traverse';
 import chalk from 'chalk';
 import { fileExists, isJsonPath, isYamlPath, getFileExt } from '../utils';
 import { AnyObject, ParseOptions } from '../typings';
+import { getDefaultConfig } from '../components/config';
+import { createLayerConfig } from '../components/layer';
 
 /**
  * Resolves any variables that require resolving
@@ -62,33 +64,40 @@ export const readAndParse = (filePath: string, options = {}): AnyObject => {
   };
 };
 
-export function parse({
-  rootDir = process.cwd(),
-  input,
+function generateLayeYaml(rootDir: string, slsOptions: AnyObject, layerOptions = '') {
+  // if get layer options, try to create it
+  if (layerOptions && JSON.parse(layerOptions)) {
+    // 1. create layer serverless.yml
+    const layerPath = join(rootDir, 'layer/serverless.yml');
+    const layerConfig = createLayerConfig(layerPath, JSON.parse(layerOptions));
+    // 2. update project serverless.yml
+    slsOptions.inputs = slsOptions.inputs || {};
+    slsOptions.inputs.layers = slsOptions.inputs.layers || [];
+    slsOptions.inputs.layers.push({
+      name: '${output:${stage}:${app}:' + layerConfig.name + '.name}',
+      version: '${output:${stage}:${app}:' + layerConfig.name + '.version}',
+    });
+  }
+  return slsOptions;
+}
+
+function outputSlsYaml({
+  rootDir,
+  inputPath,
+  fileType,
+  slsOptions,
   output,
   outputPath,
-  autoCreate = false,
-  replaceVars = '{}',
-}: ParseOptions): AnyObject {
-  let inputPath = '';
-  if (input) {
-    inputPath = resolve(rootDir, input);
-  } else {
-    inputPath = resolve(rootDir, 'serverless.yml');
-  }
-
-  if (!fileExists(inputPath)) {
-    if (autoCreate) {
-      const defaultContent = YAML.dump({ createdByCli: true });
-      fse.outputFileSync(inputPath, defaultContent);
-    } else {
-      throw new Error(`File does not exist at this path ${inputPath}`);
-    }
-  }
-
-  const { data: parseObj, type } = readAndParse(inputPath, autoCreate);
-  const parseRes = Object.assign(parseObj, JSON.parse(replaceVars));
-
+  debug,
+}: {
+  rootDir: string;
+  inputPath: string;
+  fileType: string;
+  slsOptions: AnyObject;
+  output: boolean;
+  outputPath: string | undefined;
+  debug: boolean;
+}) {
   // if need write parse res back to config file
   if (output || outputPath) {
     const ext = getFileExt(inputPath);
@@ -97,17 +106,65 @@ export function parse({
       opPath = resolve(rootDir, outputPath);
     }
     let outputContent = '';
-    if (type === 'yaml') {
-      outputContent = YAML.dump(parseRes, {});
+    if (fileType === 'yaml') {
+      outputContent = YAML.dump(slsOptions, {});
     } else {
-      outputContent = JSON.stringify(parseRes);
+      outputContent = JSON.stringify(slsOptions);
     }
     fse.outputFileSync(opPath, outputContent);
     console.log(chalk.green(`\nParse success, and output to file path ${opPath}\n`));
   } else {
-    console.log(chalk.green('\nParse Result:\n'));
-    console.log(JSON.stringify(parseRes, null, 2));
+    if (debug) {
+      console.log(chalk.green('\nParse Result:\n'));
+      console.log(JSON.stringify(slsOptions, null, 2));
+    }
+  }
+}
+
+export function parse({
+  rootDir = process.cwd(),
+  input,
+  output = false,
+  outputPath,
+  autoCreate = false,
+  slsOptionsJson = '{}',
+  layerOptionsJson,
+  component,
+  debug = false,
+}: ParseOptions): AnyObject {
+  let inputPath = '';
+  if (input) {
+    inputPath = resolve(rootDir, input);
+  } else {
+    inputPath = resolve(rootDir, 'serverless.yml');
   }
 
-  return parseRes;
+  // if serveless config file not exit and autoCreate is true
+  // try to create a default one
+  if (!fileExists(inputPath)) {
+    if (autoCreate) {
+      const defaultConfig = getDefaultConfig(component);
+      const defaultContent = YAML.dump(defaultConfig);
+      fse.outputFileSync(inputPath, defaultContent);
+    } else {
+      throw new Error(`File does not exist at this path ${inputPath}`);
+    }
+  }
+
+  const { data: parseObj, type } = readAndParse(inputPath, autoCreate);
+  let slsOptions = Object.assign(parseObj, JSON.parse(slsOptionsJson));
+
+  slsOptions = generateLayeYaml(rootDir, slsOptions, layerOptionsJson);
+
+  outputSlsYaml({
+    rootDir,
+    inputPath,
+    fileType: type,
+    slsOptions,
+    output,
+    outputPath,
+    debug,
+  });
+
+  return slsOptions;
 }

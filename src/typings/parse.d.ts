@@ -3,6 +3,10 @@ export interface ParseOptions {
   input?: string;
   output?: boolean;
   outputPath?: string;
-  replaceVars?: string;
+  slsOptionsJson?: string;
+  layerOptionsJson?: string;
   autoCreate?: boolean;
+  component?: string;
+  // debug mode
+  debug?: boolean;
 }
