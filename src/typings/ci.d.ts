@@ -251,23 +251,30 @@ export interface CreateProjectWithTemplateResponse {
   RequestId: string;
 }
 
-export interface CIParseOptions {
-  slsOptions?: AnyObject;
-  layerOptions?: AnyObject;
-}
-
 /* *******************************
  * @api CreateCodingCIJob
  */
 
 export interface LayerOptions {
-  // 是否需要部署层，默认为 false 只在再次部署层时，是否更新层
-  needDeployLayer?: boolean;
   org: string;
   app: string;
   stage: string;
   runtime: string;
 }
+export interface SlsOptions {
+  org: string;
+  app: string;
+  stage: string;
+  component: string;
+  name: string;
+  inputs?: AnyObject;
+}
+
+export interface CIParseOptions {
+  slsOptions?: SlsOptions;
+  layerOptions?: LayerOptions;
+}
+
 export interface CreateCodingCIJobOptions {
   // 构建计划名称
   jobName: string;
@@ -282,7 +289,7 @@ export interface CreateCodingCIJobOptions {
   // 是否使用 CI 提供的临时密钥作为鉴权信息，默认为 false
   useCITempAuth?: boolean;
   // 将 serverless.yml 解析成真实值配置相关配置，包括需要定制化配置和环境变量
-  parseOptions?: CIParseOptions | null;
+  parseOptions?: CIParseOptions;
   // 是否部署layer
   needDeployLayer?: boolean;
 }

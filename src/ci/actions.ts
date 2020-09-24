@@ -12,7 +12,7 @@ import {
 
 import { Pipeline } from './models/pipeline';
 
-import { NPM_INSTALL_SHELL } from '../constants';
+import { NPM_INSTALL_SHELL } from './constants';
 
 /**
  * Generate CreateProject request data

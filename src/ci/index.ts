@@ -39,18 +39,10 @@ class CodingCI implements CodingCIInterface {
   /* *********************************
    * @api CreateProjectWithTemplate
    */
-  async createProjectWithTemplate({
-    name,
-    alias,
-    description,
-    options = {},
-  }: CreateProjectWithTemplateOptions): Promise<CreateProjectWithTemplateResponse> {
-    const req = createProjectWithTemplateReq({
-      name,
-      alias,
-      description,
-      options,
-    });
+  async createProjectWithTemplate(
+    options: CreateProjectWithTemplateOptions,
+  ): Promise<CreateProjectWithTemplateResponse> {
+    const req = createProjectWithTemplateReq(options);
     const res = await request(this.capi, {
       Action: 'CreateProjectWithTemplate',
       ...req,
@@ -58,22 +50,8 @@ class CodingCI implements CodingCIInterface {
     return res;
   }
 
-  async createCodingCIJob({
-    jobName,
-    projectId,
-    depotId,
-    envs = [],
-    parseOptions,
-    needDeployLayer,
-  }: CreateCodingCIJobOptions): Promise<CreateCodingCIJobResponse> {
-    const req = createCodingCIJobReq({
-      jobName,
-      projectId,
-      depotId,
-      envs,
-      parseOptions,
-      needDeployLayer,
-    });
+  async createCodingCIJob(options: CreateCodingCIJobOptions): Promise<CreateCodingCIJobResponse> {
+    const req = createCodingCIJobReq(options);
     const res = await request(this.capi, {
       Action: 'CreateCodingCIJob',
       ...req,
@@ -81,14 +59,10 @@ class CodingCI implements CodingCIInterface {
     return res;
   }
 
-  async triggerCodingCIBuild({
-    jobId,
-    envs = [],
-  }: TriggerCodingCIBuildOptions): Promise<TriggerCodingCIBuildResponse> {
-    const req = triggerCodingCIBuildReq({
-      jobId,
-      envs,
-    });
+  async triggerCodingCIBuild(
+    options: TriggerCodingCIBuildOptions,
+  ): Promise<TriggerCodingCIBuildResponse> {
+    const req = triggerCodingCIBuildReq(options);
     const res = await request(this.capi, {
       Action: 'TriggerCodingCIBuild',
       ...req,
