@@ -11,13 +11,12 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     env:
-      # Ensure release notes are published by our `serverless-ci` bot
-      # (If instead we'd use unconditionally provided secrets.GITHUB_TOKEN then
-      # "github-actions" user will be listed as release publisher)
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
       - name: Install Node.js and npm
         uses: actions/setup-node@v1
@@ -48,6 +47,7 @@ jobs:
         #       as it appears actions/setup-node sets own value
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # 01dd......71cc
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_AUTHOR_NAME: slsplus
           GIT_AUTHOR_EMAIL: yuga.sun.bj@gmail.com
           GIT_COMMITTER_NAME: slsplus
