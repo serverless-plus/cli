@@ -1,6 +1,6 @@
 {
   "name": "@slsplus/cli",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Serverless Plus CLI tool",
   "main": "./dist/src/index.js",
   "bin": {

@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/serverless-plus/cli/compare/v0.3.1...v0.3.2) (2020-09-29)
+
+
+### Bug Fixes
+
+* optimize ci flow support using git ([#20](https://github.com/serverless-plus/cli/issues/20)) ([b67e477](https://github.com/serverless-plus/cli/commit/b67e477c7c74a464a6b97fc2b4051100e33f983c))
+
 ## [0.3.1](https://github.com/serverless-plus/cli/compare/v0.3.0...v0.3.1) (2020-09-24)
 
 
