@@ -292,6 +292,10 @@ export interface CreateCodingCIJobOptions {
   parseOptions?: CIParseOptions;
   // 是否部署layer
   needDeployLayer?: boolean;
+  // 是否需要安装 serverless，如果使用默认含有 serverless 命令的镜像，就不需要
+  needInstallSls?: boolean;
+  // 是否使用git克隆方式下载代码
+  useGit?: boolean;
 }
 
 export interface CreateCodingCIJobRequest {

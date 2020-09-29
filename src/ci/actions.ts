@@ -51,6 +51,8 @@ function createCodingCIJobReq({
   useCITempAuth = false,
   parseOptions,
   needDeployLayer = false,
+  needInstallSls = true,
+  useGit = false,
 }: CreateCodingCIJobOptions): CreateCodingCIJobRequest {
   if (!pipeline) {
     pipeline = new Pipeline();
@@ -78,19 +80,28 @@ function createCodingCIJobReq({
     steps.addShell('cat npm.sh && ls -la');
 
     // 2. install serverless cli
-    stage = stages.addStage('Installing serverless and slsplus cli');
-    steps = stage.addSteps();
-    steps.addShell('npm config ls');
-    steps.addShell('npm set registry https://registry.npmjs.org/');
-    steps.addShell('npm install -g serverless');
-    steps.addShell('sls -v');
+    if (needInstallSls) {
+      stage = stages.addStage('Installing serverless and slsplus cli');
+      steps = stage.addSteps();
+      steps.addShell('npm config ls');
+      steps.addShell('npm set registry https://registry.npmjs.org/');
+      steps.addShell('npm install -g serverless');
+      steps.addShell('sls -v');
+    }
 
     // 3. download code
     stage = stages.addStage('Downloading code');
     steps = stage.addSteps();
-    steps.addShell('wget $CODE_URL_COS -O code.zip');
-    steps.addShell('ls -l && file code.zip');
-    steps.addShell('unzip -n code.zip && rm code.zip');
+    if (useGit) {
+      steps.addShell('git init && git remote add origin $CODE_URL');
+      steps.addShell('git fetch --no-tags --prune --progress --depth=2 origin');
+      steps.addShell('git checkout --progress --force -B master refs/remotes/origin/master');
+      steps.addShell('git log -1 --format=%H');
+    } else {
+      steps.addShell('wget $CODE_URL -O code.zip');
+      steps.addShell('ls -l && file code.zip');
+      steps.addShell('unzip -n code.zip && rm code.zip');
+    }
 
     // 4. install project dependencies
     stage = stages.addStage('Install dependencies');

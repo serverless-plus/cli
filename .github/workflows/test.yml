@@ -45,3 +45,4 @@ jobs:
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
           CODE_URL_COS: ${{ secrets.CODE_URL_COS }}
+          CODE_URL_GIT: ${{ secrets.CODE_URL_GIT }}
