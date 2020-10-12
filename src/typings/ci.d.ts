@@ -296,6 +296,8 @@ export interface CreateCodingCIJobOptions {
   needInstallSls?: boolean;
   // 是否使用git克隆方式下载代码
   useGit?: boolean;
+  // git 分支，使用时需要设置 useGit 为 true
+  gitBranch?: string;
 }
 
 export interface CreateCodingCIJobRequest {

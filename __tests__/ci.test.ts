@@ -310,6 +310,7 @@ describe('Coding CI', () => {
       projectId,
       envs: credentialEnvs,
       useGit: true,
+      gitBranch: 'dev',
     });
     expect(req).toEqual({
       ProjectId: projectId,
@@ -319,7 +320,7 @@ describe('Coding CI', () => {
       HookType: 'DEFAULT',
       JenkinsFileFromType: 'STATIC',
       JenkinsFileStaticContent:
-        "pipeline {\n  agent any\n\n  stages {\n    stage(\"Initializing Node.js environment\") {\n      steps {\n        sh 'env'\n        sh 'date'\n        sh 'echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID > .env'\n        sh 'echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env'\n        sh 'echo TENCENT_TOKEN=$TENCENT_TOKEN >> .env'\n        sh 'echo SERVERLESS_PLATFORM_VENDOR=tencent >> .env'\n        sh 'echo SERVERLESS_PLATFORM_STAGE=$SERVERLESS_PLATFORM_STAGE >> .env'\n        sh '''cat > npm.sh << EOF\r\n#! /bin/bash\r\nrootPath=\\\\`pwd\\\\`\r\nfunction read_dir(){\r\n  for file in \\\\`ls \\\\$1\\\\`\r\n  do\r\n    if [ -d \\\\$1'/'\\\\$file ]; then\r\n      if [ \\\\$file != 'node_modules' ]; then\r\n        read_dir \\\\$1'/'\\\\$file\r\n      fi\r\n    else\r\n      if [ \\\\$file = 'package.json' ]; then\r\n        cd \\\\$1\r\n        npm install\r\n        cd \\\\$rootPath\r\n      fi\r\n    fi\r\n  done\r\n}\r\nread_dir \\\\$1\r\nEOF'''\n        sh 'cat npm.sh && ls -la'\n      }\n    }\n\n    stage(\"Installing serverless and slsplus cli\") {\n      steps {\n        sh 'npm config ls'\n        sh 'npm set registry https://registry.npmjs.org/'\n        sh 'npm install -g serverless'\n        sh 'sls -v'\n      }\n    }\n\n    stage(\"Downloading code\") {\n      steps {\n        sh 'git init && git remote add origin $CODE_URL'\n        sh 'git fetch --no-tags --prune --progress --depth=2 origin'\n        sh 'git checkout --progress --force -B master refs/remotes/origin/master'\n        sh 'git log -1 --format=%H'\n      }\n    }\n\n    stage(\"Install dependencies\") {\n      steps {\n        sh 'chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh'\n      }\n    }\n\n    stage(\"Deploying Serverless project\") {\n      steps {\n        sh 'serverless deploy --debug'\n      }\n    }\n\n  }\n}\n",
+        "pipeline {\n  agent any\n\n  stages {\n    stage(\"Initializing Node.js environment\") {\n      steps {\n        sh 'env'\n        sh 'date'\n        sh 'echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID > .env'\n        sh 'echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env'\n        sh 'echo TENCENT_TOKEN=$TENCENT_TOKEN >> .env'\n        sh 'echo SERVERLESS_PLATFORM_VENDOR=tencent >> .env'\n        sh 'echo SERVERLESS_PLATFORM_STAGE=$SERVERLESS_PLATFORM_STAGE >> .env'\n        sh '''cat > npm.sh << EOF\r\n#! /bin/bash\r\nrootPath=\\\\`pwd\\\\`\r\nfunction read_dir(){\r\n  for file in \\\\`ls \\\\$1\\\\`\r\n  do\r\n    if [ -d \\\\$1'/'\\\\$file ]; then\r\n      if [ \\\\$file != 'node_modules' ]; then\r\n        read_dir \\\\$1'/'\\\\$file\r\n      fi\r\n    else\r\n      if [ \\\\$file = 'package.json' ]; then\r\n        cd \\\\$1\r\n        npm install\r\n        cd \\\\$rootPath\r\n      fi\r\n    fi\r\n  done\r\n}\r\nread_dir \\\\$1\r\nEOF'''\n        sh 'cat npm.sh && ls -la'\n      }\n    }\n\n    stage(\"Installing serverless and slsplus cli\") {\n      steps {\n        sh 'npm config ls'\n        sh 'npm set registry https://registry.npmjs.org/'\n        sh 'npm install -g serverless'\n        sh 'sls -v'\n      }\n    }\n\n    stage(\"Downloading code\") {\n      steps {\n        sh 'git init && git remote add origin $CODE_URL'\n        sh 'git fetch --no-tags --prune --progress --depth=2 origin'\n        sh 'git checkout --progress --force -B dev refs/remotes/origin/dev'\n        sh 'git log -1 --format=%H'\n      }\n    }\n\n    stage(\"Install dependencies\") {\n      steps {\n        sh 'chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh'\n      }\n    }\n\n    stage(\"Deploying Serverless project\") {\n      steps {\n        sh 'serverless deploy --debug'\n      }\n    }\n\n  }\n}\n",
       AutoCancelSameRevision: true,
       AutoCancelSameMergeRequest: true,
       TriggerRemind: 'ALWAYS',
@@ -355,6 +356,7 @@ describe('Coding CI', () => {
       },
       needDeployLayer: true,
       useGit: true,
+      gitBranch: 'dev',
     });
     expect(req).toEqual({
       Data: {

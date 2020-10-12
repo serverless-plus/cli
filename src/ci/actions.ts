@@ -53,6 +53,7 @@ function createCodingCIJobReq({
   needDeployLayer = false,
   needInstallSls = true,
   useGit = false,
+  gitBranch = 'master',
 }: CreateCodingCIJobOptions): CreateCodingCIJobRequest {
   if (!pipeline) {
     pipeline = new Pipeline();
@@ -95,7 +96,9 @@ function createCodingCIJobReq({
     if (useGit) {
       steps.addShell('git init && git remote add origin $CODE_URL');
       steps.addShell('git fetch --no-tags --prune --progress --depth=2 origin');
-      steps.addShell('git checkout --progress --force -B master refs/remotes/origin/master');
+      steps.addShell(
+        `git checkout --progress --force -B ${gitBranch} refs/remotes/origin/${gitBranch}`,
+      );
       steps.addShell('git log -1 --format=%H');
     } else {
       steps.addShell('wget $CODE_URL -O code.zip');
