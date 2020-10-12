@@ -1,3 +1,10 @@
+## [0.3.3](https://github.com/serverless-plus/cli/compare/v0.3.2...v0.3.3) (2020-10-12)
+
+
+### Bug Fixes
+
+* **ci:** support git branch option ([e9d07fa](https://github.com/serverless-plus/cli/commit/e9d07faa2897f6590f2a138eebd4bee3c4bbfc72))
+
 ## [0.3.2](https://github.com/serverless-plus/cli/compare/v0.3.1...v0.3.2) (2020-09-29)
 
 
