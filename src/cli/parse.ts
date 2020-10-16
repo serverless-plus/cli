@@ -64,7 +64,7 @@ export const readAndParse = (filePath: string, options = {}): AnyObject => {
   };
 };
 
-function generateLayeYaml(rootDir: string, slsOptions: AnyObject, layerOptions = '') {
+function generateLayerYaml(rootDir: string, slsOptions: AnyObject, layerOptions = '') {
   // if get layer options, try to create it
   if (layerOptions && JSON.parse(layerOptions)) {
     // 1. create layer serverless.yml
@@ -154,7 +154,7 @@ export function parse({
   const { data: parseObj, type } = readAndParse(inputPath, autoCreate);
   let slsOptions = Object.assign(parseObj, JSON.parse(slsOptionsJson));
 
-  slsOptions = generateLayeYaml(rootDir, slsOptions, layerOptionsJson);
+  slsOptions = generateLayerYaml(rootDir, slsOptions, layerOptionsJson);
 
   outputSlsYaml({
     rootDir,

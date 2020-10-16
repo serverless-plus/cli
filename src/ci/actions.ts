@@ -60,7 +60,7 @@ function createCodingCIJobReq({
     const stages = pipeline.addStages();
 
     // 1. initial environment variables
-    let stage = stages.addStage('Initializing Node.js environment');
+    let stage = stages.addStage('Initializing node.js environment');
     let steps = stage.addSteps();
     steps.addShell('env');
     steps.addShell('date');
@@ -82,7 +82,7 @@ function createCodingCIJobReq({
 
     // 2. install serverless cli
     if (needInstallSls) {
-      stage = stages.addStage('Installing serverless and slsplus cli');
+      stage = stages.addStage('Installing serverless cli');
       steps = stage.addSteps();
       steps.addShell('npm config ls');
       steps.addShell('npm set registry https://registry.npmjs.org/');
@@ -107,7 +107,7 @@ function createCodingCIJobReq({
     }
 
     // 4. install project dependencies
-    stage = stages.addStage('Install dependencies');
+    stage = stages.addStage('Installing dependencies');
     steps = stage.addSteps();
     steps.addShell('chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh');
 
@@ -134,7 +134,7 @@ function createCodingCIJobReq({
     }
 
     // 6. deploy serverless project
-    stage = stages.addStage('Deploying Serverless project');
+    stage = stages.addStage('Deploying serverless project');
     steps = stage.addSteps();
     if (needDeployLayer) {
       // 6.1 deploy layer (optional)

@@ -14,7 +14,10 @@ function createLayerConfig(
     name: `${app}-layer`,
     inputs: {
       name: `${app}-layer`,
-      src: '../node_modules',
+      src: {
+        src: '../node_modules',
+        targetDir: '/node_modules',
+      },
       runtimes: [runtime],
     },
   };
