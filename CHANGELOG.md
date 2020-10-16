@@ -1,3 +1,10 @@
+## [0.3.4](https://github.com/serverless-plus/cli/compare/v0.3.3...v0.3.4) (2020-10-16)
+
+
+### Bug Fixes
+
+* optimize ci step title and layer config ([0345738](https://github.com/serverless-plus/cli/commit/0345738a041627316f4fee64dc5253bf946ae7b6))
+
 ## [0.3.3](https://github.com/serverless-plus/cli/compare/v0.3.2...v0.3.3) (2020-10-12)
 
 
