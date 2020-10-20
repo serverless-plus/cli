@@ -4,16 +4,17 @@ import { LayerOptions, AnyObject } from '../typings';
 
 function createLayerConfig(
   filePath: string,
-  { org, app, stage = 'dev', runtime }: LayerOptions,
+  { org, app, stage = 'dev', runtime, name }: LayerOptions,
 ): AnyObject {
+  const layerName = name ? name : `${app}-layer`;
   const defaultConfig = {
     org,
     app,
     stage,
     component: 'layer',
-    name: `${app}-layer`,
+    name: layerName,
     inputs: {
-      name: `${app}-layer`,
+      name: layerName,
       src: {
         src: '../node_modules',
         targetDir: '/node_modules',

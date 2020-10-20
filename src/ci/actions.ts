@@ -110,11 +110,12 @@ function createCodingCIJobReq({
     // 4. install project dependencies
     stage = stages.addStage('Installing dependencies');
     steps = stage.addSteps();
-    if (!needBuild) {
-      steps.addShell('chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh');
-    } else {
+    // remove node_modules in project and reinstall it
+    steps.addShell('rm -rf ./node_modules');
+    steps.addShell('chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh');
+
+    if (needBuild) {
       // 4.1 Build project
-      steps.addShell('rm -rf ./node_modules && chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh');
       stage = stages.addStage('Building project');
       steps = stage.addSteps();
       steps.addShell('npm run build');

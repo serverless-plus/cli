@@ -64,6 +64,7 @@ describe('Coding CI', () => {
         layerOptions: {
           org: 'orgDemo',
           app: 'appDemo',
+          name: 'nextjsDemo-layer',
           stage: 'dev',
           runtime: 'Nodejs10.15',
         },
@@ -87,7 +88,7 @@ describe('Coding CI', () => {
       envs: [
         {
           Name: 'CODE_URL',
-          Value: process.env.CODE_URL_COS as string,
+          Value: process.env.CODE_URL_COS_SSR as string,
           Sensitive: false,
         },
         {

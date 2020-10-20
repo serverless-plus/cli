@@ -9,7 +9,7 @@ const getType = (obj: AnyObject): string => {
   return Object.prototype.toString.call(obj).slice(8, -1);
 };
 
-const isObject = (obj: any) => {
+const isObject = (obj: AnyObject): boolean => {
   return getType(obj) === 'Object';
 };
 
@@ -69,4 +69,4 @@ const getFileExt = (filePath: string): string => {
   }
 };
 
-export { deepClone, isYamlPath, isJsonPath, fileExist, getType, mergeObject, getFileExt };
+export { isObject, deepClone, isYamlPath, isJsonPath, fileExist, getType, mergeObject, getFileExt };

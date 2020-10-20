@@ -11,6 +11,7 @@ import {
   CreateProjectWithTemplateOptions,
   CreateCodingCIJobOptions,
   TriggerCodingCIBuildOptions,
+  Project,
 } from '../typings/ci';
 import {
   createProjectWithTemplateReq,
@@ -36,12 +37,27 @@ class CodingCI implements CodingCIInterface {
       SignatureMethod: 'sha256',
     });
   }
-  /* *********************************
-   * @api CreateProjectWithTemplate
-   */
+
+  async getProjectByName(projectName: string): Promise<Project | undefined> {
+    const { ProjectList = [] } = await request(this.capi, {
+      Action: 'DescribeProjectLabels',
+    });
+    if (ProjectList.length > 0) {
+      const [project] = ProjectList.some((item: Project) => item.Name === projectName);
+      return project;
+    }
+    return undefined;
+  }
+
   async createProjectWithTemplate(
     options: CreateProjectWithTemplateOptions,
   ): Promise<CreateProjectWithTemplateResponse> {
+    const project = await this.getProjectByName(options.name);
+    if (project) {
+      return {
+        ProjectId: project.Id,
+      };
+    }
     const req = createProjectWithTemplateReq(options);
     const res = await request(this.capi, {
       Action: 'CreateProjectWithTemplate',

@@ -248,7 +248,7 @@ export interface CreateProjectWithTemplateResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  RequestId: string;
+  RequestId?: string;
 }
 
 /* *******************************
@@ -260,14 +260,28 @@ export interface LayerOptions {
   app: string;
   stage: string;
   runtime: string;
+  name?: string;
 }
+
+export interface SrcObject {
+  src?: string;
+  dist?: string;
+  hook?: string;
+  exclude?: string[];
+}
+
+export interface SlsInputs {
+  src?: string | SrcObject;
+  [propName: string]: any;
+}
+
 export interface SlsOptions {
   org: string;
   app: string;
   stage: string;
   component: string;
   name: string;
-  inputs?: AnyObject;
+  inputs?: SlsInputs;
 }
 
 export interface CIParseOptions {
@@ -688,6 +702,26 @@ export interface DescribeCodingCIBuildResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId: string;
+}
+
+export interface Project {
+  Name: string;
+  Id: number;
+  Type: number;
+  DisplayName: string;
+  Icon: string;
+  Description: string;
+  CreatedAt: number;
+  MaxMember: number;
+  TeamId: number;
+  UserOwnerId: number;
+  IsDemo: boolean;
+  Archived: boolean;
+  StartDate: number;
+  UpdatedAt: number;
+  TeamOwnerId: number;
+  EndDate: number;
+  Status: number;
 }
 
 export interface CodingCIInterface {
