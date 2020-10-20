@@ -298,6 +298,8 @@ export interface CreateCodingCIJobOptions {
   useGit?: boolean;
   // git 分支，使用时需要设置 useGit 为 true
   gitBranch?: string;
+  // 是否需要编译项目
+  needBuild?: boolean;
 }
 
 export interface CreateCodingCIJobRequest {

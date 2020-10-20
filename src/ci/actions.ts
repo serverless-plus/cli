@@ -51,6 +51,7 @@ function createCodingCIJobReq({
   useCITempAuth = false,
   parseOptions,
   needDeployLayer = false,
+  needBuild = false,
   needInstallSls = true,
   useGit = false,
   gitBranch = 'master',
@@ -109,7 +110,15 @@ function createCodingCIJobReq({
     // 4. install project dependencies
     stage = stages.addStage('Installing dependencies');
     steps = stage.addSteps();
-    steps.addShell('chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh');
+    if (!needBuild) {
+      steps.addShell('chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh');
+    } else {
+      // 4.1 Build project
+      steps.addShell('rm -rf ./node_modules && chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh');
+      stage = stages.addStage('Building project');
+      steps = stage.addSteps();
+      steps.addShell('npm run build');
+    }
 
     // 5. Processing serverless config files (optional)
     // whether need parse serverless.yml to source values config

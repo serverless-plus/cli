@@ -3,7 +3,7 @@ import fse from 'fs-extra';
 import YAML from 'js-yaml';
 import traverse from 'traverse';
 import chalk from 'chalk';
-import { fileExists, isJsonPath, isYamlPath, getFileExt } from '../utils';
+import { fileExist, isJsonPath, isYamlPath, getFileExt } from '../utils';
 import { AnyObject, ParseOptions } from '../typings';
 import { getDefaultConfig } from '../components/config';
 import { createLayerConfig } from '../components/layer';
@@ -141,7 +141,7 @@ export function parse({
 
   // if serveless config file not exit and autoCreate is true
   // try to create a default one
-  if (!fileExists(inputPath)) {
+  if (!fileExist(inputPath)) {
     if (autoCreate) {
       const defaultConfig = getDefaultConfig(component);
       const defaultContent = YAML.dump(defaultConfig);

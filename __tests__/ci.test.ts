@@ -140,8 +140,8 @@ describe('Coding CI', () => {
           org: 'orgDemo',
           app: 'appDemo',
           stage: 'dev',
-          component: 'express',
-          name: 'expressDemo',
+          component: 'nextjs',
+          name: 'nextjsDemo',
           inputs: {
             src: './',
           },
@@ -154,6 +154,7 @@ describe('Coding CI', () => {
         },
       },
       needDeployLayer: true,
+      needBuild: true,
     });
 
     expect(req).toEqual({
@@ -164,7 +165,7 @@ describe('Coding CI', () => {
       HookType: 'DEFAULT',
       JenkinsFileFromType: 'STATIC',
       JenkinsFileStaticContent:
-        "pipeline {\n  agent any\n\n  stages {\n    stage(\"Initializing node.js environment\") {\n      steps {\n        sh 'env'\n        sh 'date'\n        sh 'echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID > .env'\n        sh 'echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env'\n        sh 'echo TENCENT_TOKEN=$TENCENT_TOKEN >> .env'\n        sh 'echo SERVERLESS_PLATFORM_VENDOR=tencent >> .env'\n        sh 'echo SERVERLESS_PLATFORM_STAGE=$SERVERLESS_PLATFORM_STAGE >> .env'\n        sh '''cat > npm.sh << EOF\r\n#! /bin/bash\r\nrootPath=\\\\`pwd\\\\`\r\nfunction read_dir(){\r\n  for file in \\\\`ls \\\\$1\\\\`\r\n  do\r\n    if [ -d \\\\$1'/'\\\\$file ]; then\r\n      if [ \\\\$file != 'node_modules' ]; then\r\n        read_dir \\\\$1'/'\\\\$file\r\n      fi\r\n    else\r\n      if [ \\\\$file = 'package.json' ]; then\r\n        cd \\\\$1\r\n        npm install\r\n        cd \\\\$rootPath\r\n      fi\r\n    fi\r\n  done\r\n}\r\nread_dir \\\\$1\r\nEOF'''\n        sh 'cat npm.sh && ls -la'\n      }\n    }\n\n    stage(\"Installing serverless cli\") {\n      steps {\n        sh 'npm config ls'\n        sh 'npm set registry https://registry.npmjs.org/'\n        sh 'npm install -g serverless'\n        sh 'sls -v'\n      }\n    }\n\n    stage(\"Downloading code\") {\n      steps {\n        sh 'wget $CODE_URL -O code.zip'\n        sh 'ls -l && file code.zip'\n        sh 'unzip -n code.zip && rm code.zip'\n      }\n    }\n\n    stage(\"Installing dependencies\") {\n      steps {\n        sh 'chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh'\n      }\n    }\n\n    stage(\"Processing serverless config files\") {\n      steps {\n        sh 'npm install -g @slsplus/cli'\n        sh 'slsplus parse --output --auto-create --sls-options=\\'{\"org\":\"orgDemo\",\"app\":\"appDemo\",\"stage\":\"dev\",\"component\":\"express\",\"name\":\"expressDemo\",\"inputs\":{\"src\":\"./\"}}\\' && cat serverless.yml'\n        sh 'slsplus parse --output --auto-create --layer-options=\\'{\"org\":\"orgDemo\",\"app\":\"appDemo\",\"stage\":\"dev\",\"runtime\":\"Nodejs10.15\"}\\' && cat layer/serverless.yml'\n      }\n    }\n\n    stage(\"Deploying serverless project\") {\n      steps {\n        sh 'serverless deploy --debug --target=./layer'\n        sh 'serverless deploy --debug'\n      }\n    }\n\n  }\n}\n",
+        "pipeline {\n  agent any\n\n  stages {\n    stage(\"Initializing node.js environment\") {\n      steps {\n        sh 'env'\n        sh 'date'\n        sh 'echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID > .env'\n        sh 'echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env'\n        sh 'echo TENCENT_TOKEN=$TENCENT_TOKEN >> .env'\n        sh 'echo SERVERLESS_PLATFORM_VENDOR=tencent >> .env'\n        sh 'echo SERVERLESS_PLATFORM_STAGE=$SERVERLESS_PLATFORM_STAGE >> .env'\n        sh '''cat > npm.sh << EOF\r\n#! /bin/bash\r\nrootPath=\\\\`pwd\\\\`\r\nfunction read_dir(){\r\n  for file in \\\\`ls \\\\$1\\\\`\r\n  do\r\n    if [ -d \\\\$1'/'\\\\$file ]; then\r\n      if [ \\\\$file != 'node_modules' ]; then\r\n        read_dir \\\\$1'/'\\\\$file\r\n      fi\r\n    else\r\n      if [ \\\\$file = 'package.json' ]; then\r\n        cd \\\\$1\r\n        npm install\r\n        cd \\\\$rootPath\r\n      fi\r\n    fi\r\n  done\r\n}\r\nread_dir \\\\$1\r\nEOF'''\n        sh 'cat npm.sh && ls -la'\n      }\n    }\n\n    stage(\"Installing serverless cli\") {\n      steps {\n        sh 'npm config ls'\n        sh 'npm set registry https://registry.npmjs.org/'\n        sh 'npm install -g serverless'\n        sh 'sls -v'\n      }\n    }\n\n    stage(\"Downloading code\") {\n      steps {\n        sh 'wget $CODE_URL -O code.zip'\n        sh 'ls -l && file code.zip'\n        sh 'unzip -n code.zip && rm code.zip'\n      }\n    }\n\n    stage(\"Installing dependencies\") {\n      steps {\n        sh 'rm -rf ./node_modules && chmod +x ./npm.sh && ./npm.sh `pwd` && rm npm.sh'\n      }\n    }\n\n    stage(\"Building project\") {\n      steps {\n        sh 'npm run build'\n      }\n    }\n\n    stage(\"Processing serverless config files\") {\n      steps {\n        sh 'npm install -g @slsplus/cli'\n        sh 'slsplus parse --output --auto-create --sls-options=\\'{\"org\":\"orgDemo\",\"app\":\"appDemo\",\"stage\":\"dev\",\"component\":\"nextjs\",\"name\":\"nextjsDemo\",\"inputs\":{\"src\":\"./\"}}\\' && cat serverless.yml'\n        sh 'slsplus parse --output --auto-create --layer-options=\\'{\"org\":\"orgDemo\",\"app\":\"appDemo\",\"stage\":\"dev\",\"runtime\":\"Nodejs10.15\"}\\' && cat layer/serverless.yml'\n      }\n    }\n\n    stage(\"Deploying serverless project\") {\n      steps {\n        sh 'serverless deploy --debug --target=./layer'\n        sh 'serverless deploy --debug'\n      }\n    }\n\n  }\n}\n",
       AutoCancelSameRevision: true,
       AutoCancelSameMergeRequest: true,
       TriggerRemind: 'ALWAYS',
@@ -185,11 +186,17 @@ describe('Coding CI', () => {
           org: 'orgDemo',
           app: 'appDemo',
           stage: 'dev',
-          component: 'express',
-          name: 'expressDemo',
+          component: 'nextjs',
+          name: 'nextjsDemo',
           inputs: {
             src: { src: './', exclude: ['.env', 'node_modules/**'] },
             apigatewayConf: { protocols: ['http', 'https'] },
+            staticConf: {
+              cosConf: {
+                replace: true,
+                bucket: 'cli-nextjs-test',
+              },
+            },
           },
         },
         layerOptions: {
@@ -200,6 +207,7 @@ describe('Coding CI', () => {
         },
       },
       needDeployLayer: true,
+      needBuild: true,
     });
     expect(req).toEqual({
       Data: {
@@ -242,6 +250,11 @@ describe('Coding CI', () => {
         {
           Name: 'CODE_URL',
           Value: process.env.CODE_URL_COS as string,
+          Sensitive: false,
+        },
+        {
+          Name: 'STATIC_URL',
+          Value: process.env.STATIC_URL as string,
           Sensitive: false,
         },
       ],

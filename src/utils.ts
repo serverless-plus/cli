@@ -49,9 +49,9 @@ const isYamlPath = (filePath: string): boolean =>
 const isJsonPath = (filePath: string): boolean => endsWith('.json', filePath);
 
 /**
- * Checks if a file exists
+ * Checks if a file exist
  */
-const fileExists = (filePath: string): boolean => {
+const fileExist = (filePath: string): boolean => {
   try {
     const stats = fs.lstatSync(filePath);
     return stats.isFile();
@@ -69,4 +69,4 @@ const getFileExt = (filePath: string): string => {
   }
 };
 
-export { deepClone, isYamlPath, isJsonPath, fileExists, getType, mergeObject, getFileExt };
+export { deepClone, isYamlPath, isJsonPath, fileExist, getType, mergeObject, getFileExt };

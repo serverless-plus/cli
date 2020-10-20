@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { removeSync, outputFileSync } from 'fs-extra';
 import { parse, readAndParse } from '../src/cli/parse';
-import { fileExists } from '../src/utils';
+import { fileExist } from '../src/utils';
 import { AnyObject } from '../src/typings/index.d';
 interface ConfigFileContent extends AnyObject {
   yml: string;
@@ -258,7 +258,7 @@ inputs:
           },
         },
       });
-      expect(fileExists(opFile)).toBe(true);
+      expect(fileExist(opFile)).toBe(true);
     });
   }
 });
