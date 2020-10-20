@@ -1,3 +1,10 @@
+## [0.3.5](https://github.com/serverless-plus/cli/compare/v0.3.4...v0.3.5) (2020-10-20)
+
+
+### Bug Fixes
+
+* support ci build option ([73f5cb0](https://github.com/serverless-plus/cli/commit/73f5cb06a7120a76bc59e37a82f8d3551b7318cd))
+
 ## [0.3.4](https://github.com/serverless-plus/cli/compare/v0.3.3...v0.3.4) (2020-10-16)
 
 
