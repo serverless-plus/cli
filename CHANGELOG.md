@@ -1,3 +1,10 @@
+## [0.3.6](https://github.com/serverless-plus/cli/compare/v0.3.5...v0.3.6) (2020-10-20)
+
+
+### Bug Fixes
+
+* **ci:** add rm node_modules by default ([#24](https://github.com/serverless-plus/cli/issues/24)) ([9a8f864](https://github.com/serverless-plus/cli/commit/9a8f864866bc72ff5665f53ccbac1880046fe435))
+
 ## [0.3.5](https://github.com/serverless-plus/cli/compare/v0.3.4...v0.3.5) (2020-10-20)
 
 
