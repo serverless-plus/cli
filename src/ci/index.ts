@@ -1,5 +1,6 @@
 import { Capi } from '@tencent-sdk/capi';
 import {
+  Credential,
   CodingCIInterface,
   CreateCodingCIJobResponse,
   CreateProjectWithTemplateResponse,
@@ -7,12 +8,11 @@ import {
   DescribeCodingCIBuildResponse,
   DescribeCodingCIBuildStageResponse,
   DescribeCodingCIBuildLogResponse,
-  CodingCIOptions,
   CreateProjectWithTemplateOptions,
   CreateCodingCIJobOptions,
   TriggerCodingCIBuildOptions,
   Project,
-} from '../typings/ci';
+} from '../typings';
 import {
   createProjectWithTemplateReq,
   createCodingCIJobReq,
@@ -26,13 +26,14 @@ import { request } from '../apis';
 
 class CodingCI implements CodingCIInterface {
   capi: Capi;
-  constructor({ secretId, secretKey, token, region = 'ap-guangzhou' }: CodingCIOptions) {
+  constructor({ secretId, secretKey, token, region = 'ap-guangzhou' }: Credential) {
     this.capi = new Capi({
       SecretId: secretId,
       SecretKey: secretKey,
       Token: token,
       Region: region,
       ServiceType: 'coding',
+      RequestClient: 'slsplus_coding',
       Version: '2019-10-21',
       SignatureMethod: 'sha256',
     });

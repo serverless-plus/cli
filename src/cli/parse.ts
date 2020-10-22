@@ -3,6 +3,7 @@ import fse from 'fs-extra';
 import YAML from 'js-yaml';
 import traverse from 'traverse';
 import chalk from 'chalk';
+import { program } from 'commander';
 import { fileExist, isJsonPath, isYamlPath, getFileExt } from '../utils';
 import { AnyObject, ParseOptions } from '../typings';
 import { getDefaultConfig } from '../components/config';
@@ -168,3 +169,35 @@ export function parse({
 
   return slsOptions;
 }
+
+const parseCommand = (): void => {
+  program
+    .command('parse')
+    .description(
+      'parse serverless config file with costomize and environment variables replacement',
+    )
+    .option('-i, --input [input]', 'source serverless config file path')
+    .option('-o, --output', 'whether output parse result to input serverless config file', false)
+    .option(
+      '-O, --output-path [outputPath]',
+      'output parse result to target serverless config file path',
+    )
+    .option('-r, --root [rootDir]', 'root directory for parse command running')
+    .option('-a, --auto-create', 'whether auto create serverless config file', false)
+    .option('-c, --component [component]', 'serverless component name')
+    .option('-s, --sls-options [slsOptions]', 'serverless config')
+    .option('-l, --layer-options [layerOptions]', 'serverless layer config')
+    .action((options) => {
+      parse({
+        rootDir: options.rootDir,
+        input: options.input,
+        output: options.output,
+        outputPath: options.outputPath,
+        slsOptionsJson: options.slsOptions,
+        layerOptionsJson: options.layerOptions,
+        autoCreate: options.autoCreate,
+      });
+    });
+};
+
+export { parseCommand };

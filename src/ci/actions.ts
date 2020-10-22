@@ -48,13 +48,14 @@ function createCodingCIJobReq({
   depotId,
   envs = [],
   pipeline,
-  useCITempAuth = false,
   parseOptions,
+  useCITempAuth = false,
   needDeployLayer = false,
   needBuild = false,
   needInstallSls = true,
   useGit = false,
   gitBranch = 'master',
+  warmUp = false,
 }: CreateCodingCIJobOptions): CreateCodingCIJobRequest {
   if (!pipeline) {
     pipeline = new Pipeline();
@@ -152,6 +153,15 @@ function createCodingCIJobReq({
     }
     // 6.2 deploy project
     steps.addShell('serverless deploy --debug');
+
+    if (warmUp && parseOptions?.slsOptions) {
+      const { slsOptions } = parseOptions;
+      stage = stages.addStage('Warming up serverless project');
+      steps = stage.addSteps();
+      steps.addShell(
+        `slsplus faas warm-app --app=${slsOptions.app} --stage=${slsOptions.stage} --name=${slsOptions.name}`,
+      );
+    }
   } else {
     if (!(pipeline instanceof Pipeline)) {
       throw new Error('[PARAMETER_ERROR] pipeline should be instance of Pipeline');

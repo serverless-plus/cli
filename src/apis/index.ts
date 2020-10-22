@@ -26,18 +26,18 @@ function cleanEmptyValue(obj: ObjectInstance) {
 }
 
 async function request(capi: Capi, options: RequestOptions): Promise<any | ApiError> {
+  const { ServiceType } = capi.options;
+  const typePrefix = `API_${ServiceType.toUpperCase()}_`;
   try {
     const reqData = cleanEmptyValue(options) as RequestData;
     const res = await capi.request(reqData, {
       isV3: false,
       debug: false,
-      host: 'coding.tencentcloudapi.com',
-      RequestClient: 'slsplus_coding',
     });
     const { Response } = res;
     if (Response && Response.Error && Response.Error.Code) {
       throw new ApiError({
-        type: `API_CODING_${options.Action}`,
+        type: `${typePrefix}${options.Action}`,
         message: `${Response.Error.Message} (reqId: ${Response.RequestId})`,
         reqId: Response.RequestId,
         code: Response.Error.Code,
@@ -46,7 +46,7 @@ async function request(capi: Capi, options: RequestOptions): Promise<any | ApiEr
     return Response;
   } catch (e) {
     throw new ApiError({
-      type: `API_CODING__${options.Action}`,
+      type: `${typePrefix}${options.Action}`,
       message: e.message,
       stack: e.stack,
       reqId: e.reqId,

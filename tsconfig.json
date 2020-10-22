@@ -25,5 +25,5 @@
     "rootDir": ".",
     "outDir": "dist"
   },
-  "include": ["src", "src/typings/**/*.d.ts", "./package.json"]
+  "include": ["src", "src/typings/**/*.d.ts", "./package.json", "src/cli/.ts"]
 }

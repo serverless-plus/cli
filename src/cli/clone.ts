@@ -1,5 +1,6 @@
 import { spawn } from 'child_process';
 import ora from 'ora';
+import { program } from 'commander';
 
 export function clone(source: string, dest: string): void {
   const spinner = ora().start('Start cloning git project...\n');
@@ -22,3 +23,14 @@ export function clone(source: string, dest: string): void {
     }
   });
 }
+
+const cloneCommand = (): void => {
+  program
+    .command('clone <source> [destination]')
+    .description('clone a repository into a newly created directory')
+    .action((source, destination) => {
+      clone(source, destination);
+    });
+};
+
+export { cloneCommand };

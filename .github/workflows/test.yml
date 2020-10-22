@@ -46,5 +46,7 @@ jobs:
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
           CODE_URL_COS: https://test-1251556596.cos.ap-guangzhou.myqcloud.com/express-demo.zip
           CODE_URL_GIT: https://github.com/serverless-plus/express-demo.git
-          CODE_URL_COS_SSR: https://test-1251556596.cos.ap-guangzhou.myqcloud.com/nextjs-demo-pure.zip
-          STATIC_URL: https://cli-nextjs-test-1251556596.cos.ap-guangzhou.myqcloud.com
+          CODE_URL_COS_NEXTJS: https://test-1251556596.cos.ap-guangzhou.myqcloud.com/nextjs-demo-pure.zip
+          STATIC_URL_NEXTJS: https://cli-nextjs-test-1251556596.cos.ap-guangzhou.myqcloud.com
+          CODE_URL_COS_NUXTJS: https://test-1251556596.cos.ap-guangzhou.myqcloud.com/nuxtjs-demo-pure.zip
+          STATIC_URL_NUXTJS: https://cli-nuxtjs-test-1251556596.cos.ap-guangzhou.myqcloud.com

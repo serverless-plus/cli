@@ -314,6 +314,8 @@ export interface CreateCodingCIJobOptions {
   gitBranch?: string;
   // 是否需要编译项目
   needBuild?: boolean;
+  // 是否需要预热云函数
+  warmUp?: boolean;
 }
 
 export interface CreateCodingCIJobRequest {
@@ -675,13 +677,6 @@ export interface DescribeCodingCIBuildLogResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId: string;
-}
-
-export interface CodingCIOptions {
-  secretId: string;
-  secretKey: string;
-  token?: string;
-  region?: string;
 }
 
 /* *******************************

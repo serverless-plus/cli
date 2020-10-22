@@ -1,6 +1,6 @@
 import YAML from 'js-yaml';
 import fse from 'fs-extra';
-import { LayerOptions, AnyObject } from '../typings';
+import { LayerOptions, AnyObject } from '../../typings';
 
 function createLayerConfig(
   filePath: string,

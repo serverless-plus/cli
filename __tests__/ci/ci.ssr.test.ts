@@ -38,9 +38,9 @@ describe('Coding CI', () => {
     projectId = req.ProjectId;
   });
 
-  it('[createCodingCIJob] should create project job success', async () => {
+  it('[createCodingCIJob using nextjs] should create project job success', async () => {
     const req = await ci.createCodingCIJob({
-      jobName: 'slsplus-cli-test-ssr',
+      jobName: 'slsplus-cli-test-nextjs',
       projectId,
       envs: credentialEnvs,
       parseOptions: {
@@ -71,6 +71,7 @@ describe('Coding CI', () => {
       },
       needDeployLayer: true,
       needBuild: true,
+      warmUp: true,
     });
     expect(req).toEqual({
       Data: {
@@ -88,12 +89,79 @@ describe('Coding CI', () => {
       envs: [
         {
           Name: 'CODE_URL',
-          Value: process.env.CODE_URL_COS_SSR as string,
+          Value: process.env.CODE_URL_COS_NEXTJS as string,
           Sensitive: false,
         },
         {
           Name: 'STATIC_URL',
-          Value: process.env.STATIC_URL as string,
+          Value: process.env.STATIC_URL_NEXTJS as string,
+          Sensitive: false,
+        },
+      ],
+    });
+    expect(typeof req.RequestId).toBe('string');
+    expect(typeof req.Data.Build.Id).toBe('number');
+    expect(req.Data.Build.JobId).toBe(cosJobId);
+
+    buildId = req.Data.Build.Id;
+  });
+
+  it('[createCodingCIJob using nuxtjs] should create project job success', async () => {
+    const req = await ci.createCodingCIJob({
+      jobName: 'slsplus-cli-test-nuxtjs',
+      projectId,
+      envs: credentialEnvs,
+      parseOptions: {
+        slsOptions: {
+          org: 'orgDemo',
+          app: 'appDemo',
+          stage: 'dev',
+          component: 'nuxtjs',
+          name: 'nuxtjsDemo',
+          inputs: {
+            src: { src: './', exclude: ['.env', 'node_modules/**'] },
+            apigatewayConf: { protocols: ['http', 'https'] },
+            staticConf: {
+              cosConf: {
+                replace: true,
+                bucket: 'cli-nuxtjs-test',
+              },
+            },
+          },
+        },
+        layerOptions: {
+          org: 'orgDemo',
+          app: 'appDemo',
+          name: 'nuxtjsDemo-layer',
+          stage: 'dev',
+          runtime: 'Nodejs10.15',
+        },
+      },
+      needDeployLayer: true,
+      needBuild: true,
+    });
+    expect(req).toEqual({
+      Data: {
+        Id: expect.any(Number),
+      },
+      RequestId: expect.any(String),
+    });
+
+    cosJobId = req.Data.Id;
+  });
+
+  it('[triggerCodingCIBuild] should trigger ci build success', async () => {
+    const req = await ci.triggerCodingCIBuild({
+      jobId: cosJobId,
+      envs: [
+        {
+          Name: 'CODE_URL',
+          Value: process.env.CODE_URL_COS_NUXTJS as string,
+          Sensitive: false,
+        },
+        {
+          Name: 'STATIC_URL',
+          Value: process.env.STATIC_URL_NUXTJS as string,
           Sensitive: false,
         },
       ],
