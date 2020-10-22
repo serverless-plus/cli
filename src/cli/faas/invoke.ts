@@ -22,6 +22,33 @@ async function invoke(options: CliInvokeOptions): Promise<void> {
       spinner.start(
         `Invoking functtion ${options.name}, qualifier ${options.qualifier}, namespace ${options.namespace}`,
       );
+      const { context: inputEvent } = options;
+      let eventJson = '';
+      if (inputEvent) {
+        try {
+          eventJson = JSON.stringify(JSON.parse(inputEvent));
+        } catch (e) {
+          const eventJsonPath = join(process.cwd(), inputEvent);
+          try {
+            if (fileExist(eventJsonPath)) {
+              const eventFileContent = fse.readFileSync(eventJsonPath, 'utf-8');
+              try {
+                JSON.parse(eventFileContent);
+                eventJson = fse.readFileSync(eventJsonPath, 'utf-8');
+              } catch (er) {
+                spinner.fail(
+                  `[OPTIONS] Invalid event parameter, need json file path or json string`,
+                );
+              }
+            }
+          } catch (err) {
+            spinner.fail(`[OPTIONS] Invalid event parameter, need json file path or json string`);
+          }
+        }
+      } else {
+        eventJson = '{}';
+      }
+      options.context = eventJson;
       const res = await faas.invoke(options);
       spinner.succeed('Invoke success');
       if (options.output) {
