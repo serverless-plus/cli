@@ -67,7 +67,7 @@ $ slsplus clone https://github.com/serverless-plus/cli
 
 ### faas
 
-Before using `faas` command, you should config tencent cloud credentilas in `.env` file in current command run path:
+Before using `faas` command, you should run `slsplus config` to config tencent cloud credentilas:
 
 ```
 TENCENT_SECRET_ID=xxx
