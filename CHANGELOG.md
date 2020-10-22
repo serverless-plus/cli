@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/serverless-plus/cli/compare/v0.3.6...v0.4.0) (2020-10-22)
+
+
+### Features
+
+* support faas warm and invoke command ([#25](https://github.com/serverless-plus/cli/issues/25)) ([40ac01a](https://github.com/serverless-plus/cli/commit/40ac01aed0b8428e7999ce3e957e54ec129b733a))
+
 ## [0.3.6](https://github.com/serverless-plus/cli/compare/v0.3.5...v0.3.6) (2020-10-20)
 
 
