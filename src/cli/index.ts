@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import { program } from 'commander';
+import { initialize } from './initialize';
+import { configCommand } from './config';
 import { cloneCommand } from './clone';
 import { parseCommand } from './parse';
 import { faasCommand } from './faas';
@@ -8,6 +10,9 @@ import { faasCommand } from './faas';
 import pkg from '../../package.json';
 
 async function run() {
+  // init environment
+  await initialize();
+
   program.storeOptionsAsProperties(false).passCommandToAction(false);
   program.version(
     `Slsplus CLI Version: ${pkg.version}`,
@@ -16,6 +21,7 @@ async function run() {
   );
 
   // inject sub commands
+  configCommand();
   cloneCommand();
   parseCommand();
   faasCommand();

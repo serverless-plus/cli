@@ -55,6 +55,7 @@
   "dependencies": {
     "@tencent-sdk/capi": "^1.1.5",
     "@types/fs-extra": "^9.0.1",
+    "@types/inquirer": "^7.3.1",
     "@types/js-yaml": "^3.12.5",
     "@types/ora": "^3.2.0",
     "@types/traverse": "^0.6.32",
@@ -63,6 +64,7 @@
     "commander": "^6.1.0",
     "dotenv": "^8.2.0",
     "fs-extra": "^9.0.1",
+    "inquirer": "^7.3.3",
     "js-yaml": "^3.14.0",
     "ora": "^5.1.0",
     "traverse": "^0.6.6",

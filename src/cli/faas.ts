@@ -5,19 +5,9 @@ import fse from 'fs-extra';
 import assert from 'assert';
 import { program } from 'commander';
 import { Faas } from '../components/faas';
-import { Credential, InvokeOptions, WarmOptions } from '../typings';
+import { InvokeOptions, WarmOptions } from '../typings';
 import { fileExist } from '../utils';
-
-function getCredential(): Credential | null {
-  const { TENCENT_SECRET_ID, TENCENT_SECRET_KEY } = process.env;
-  if (TENCENT_SECRET_ID && TENCENT_SECRET_KEY) {
-    return {
-      secretId: TENCENT_SECRET_ID,
-      secretKey: TENCENT_SECRET_KEY,
-    };
-  }
-  return null;
-}
+import { getCredential } from './constants';
 
 async function warm(options: WarmOptions): Promise<void> {
   const credential = getCredential();

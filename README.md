@@ -8,22 +8,21 @@
 CLI tool for Serverless Plus
 
 - [@slsplus/cli](#Serverless-Plus-CLI)
+  - [Support Cloud Vendors](#support-cloud-vendors)
   - [Installation](#installation)
   - [Usage](#usage)
+    - [config command](#config)
     - [clone command](#clone)
     - [faas command](#faas)
       - [faas invoke command](#faas-invoke)
       - [faas warm command](#faas-warm)
     - [parse command](#Parse-serverless-config-file)
 
-## Features
+## Support Cloud Vendors
 
-- [x] [Typescript](https://github.com/microsoft/TypeScript)
-- [x] [Github Actions](https://github.com/features/actions)
-- [x] [Eslint](https://github.com/eslint/eslint)
-- [x] [Prettier](https://github.com/prettier/prettier)
-- [x] [Jest](https://github.com/facebook/jest)
-- [x] [semantic-release](https://github.com/semantic-release/semantic-release)
+- [x] Tencent Cloud
+- [ ] AWS
+- [ ] Aliyun
 
 ## Installation
 
@@ -49,6 +48,14 @@ Commands:
 
 Example call:
   $ slsplus --help
+```
+
+### config
+
+Config credentils for vendors:
+
+```bash
+$ slsplus config
 ```
 
 ### clone
