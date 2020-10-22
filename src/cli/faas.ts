@@ -6,6 +6,7 @@ import assert from 'assert';
 import { program } from 'commander';
 import { Faas } from '../components/faas';
 import { Credential, InvokeOptions, WarmOptions } from '../typings';
+import { fileExist } from '../utils';
 
 function getCredential(): Credential | null {
   const { TENCENT_SECRET_ID, TENCENT_SECRET_KEY } = process.env;
@@ -56,15 +57,20 @@ async function invoke(options: CliInvokeOptions): Promise<void> {
     const faas = new Faas(credential);
     const spinner = ora();
     try {
-      assert(options.name, '[OPTIONS] fname is required');
+      assert(options.name, '[OPTIONS] name is required');
       spinner.start(
         `Invoking functtion ${options.name}, qualifier ${options.qualifier}, namespace ${options.namespace}`,
       );
       const res = await faas.invoke(options);
       spinner.succeed('Invoke success');
       if (options.output) {
+        let content = `${new Date().toISOString()}: ${JSON.stringify(res)}`;
         const opPath = join(process.cwd(), 'invoke.log');
-        fse.outputFileSync(opPath, `${new Date().toISOString()}: ${JSON.stringify(res)}`);
+        if (fileExist(opPath)) {
+          const oldContent = fse.readFileSync(opPath, 'utf-8');
+          content = `${oldContent}\n${content}`;
+        }
+        fse.outputFileSync(opPath, content);
         console.log(chalk.green(`\Output invoke reault to file path ${opPath}\n`));
       } else {
         console.log(chalk.green('\nInvoke Result:\n'));
@@ -109,14 +115,14 @@ const faasCommand = (): void => {
   cli
     .command('invoke')
     .description('Invoke faas')
-    .option('-f, --fname [fname]', 'function name')
-    .option('-n, --namespace [namespace]', 'namespace', 'default')
+    .option('-n, --name [name]', 'function name')
+    .option('-ns, --namespace [namespace]', 'namespace', 'default')
     .option('-q, --qualifier [qualifier]', 'function version', '$LATEST')
     .option('-e, --event [event]', 'event json for invoking function')
     .option('-o, --output', 'output invoke result to invoke.log file', false)
     .action((options) => {
       invoke({
-        name: options.fname,
+        name: options.name,
         namespace: options.namespace,
         qualifier: options.qualifier,
         context: options.event || JSON.stringify({}),

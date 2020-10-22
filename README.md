@@ -7,6 +7,15 @@
 
 CLI tool for Serverless Plus
 
+- [@slsplus/cli](#Serverless-Plus-CLI)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [clone command](#clone)
+    - [faas command](#faas)
+      - [faas invoke command](#faas-invoke)
+      - [faas warm command](#faas-warm)
+    - [parse command](#Parse-serverless-config-file)
+
 ## Features
 
 - [x] [Typescript](https://github.com/microsoft/TypeScript)
@@ -16,17 +25,69 @@ CLI tool for Serverless Plus
 - [x] [Jest](https://github.com/facebook/jest)
 - [x] [semantic-release](https://github.com/semantic-release/semantic-release)
 
-## Usage
+## Installation
 
 ```bash
 $ npm i @slsplus/cli -g
-$ slsplus -h
 ```
 
-### Clone project
+## Usage
+
+```bash
+$ slsplus -h
+Usage: slsplus [options] [command]
+
+Options:
+  -v, --version                 output the current version
+  -h, --help                    display help for command
+
+Commands:
+  clone <source> [destination]  clone a repository into a newly created directory
+  parse [options]               parse serverless config file with costomize and environment variables replacement
+  faas
+  help [command]                display help for command
+
+Example call:
+  $ slsplus --help
+```
+
+### clone
 
 ```bash
 $ slsplus clone https://github.com/serverless-plus/cli
+```
+
+### faas
+
+Before using `faas` command, you should config tencent cloud credentilas in `.env` file in current command run path:
+
+```
+TENCENT_SECRET_ID=xxx
+TENCENT_SECRET_KEY=xxx
+```
+
+#### faas invoke
+
+Invoke cloud faas:
+
+```bash
+$ slsplus faas invoke --name=scf-demo
+```
+
+#### faas warm
+
+Warm up cloud faas:
+
+```bash
+# name parameter is the name of cloud function
+$ slsplus faas warm --name=scf-demo
+```
+
+It also support to warm up application created by [serverless components](https://github.com/serverless/components):
+
+```bash
+# name parameter is the name configured in serverless.yml
+$ slsplus faas warm-app --name=scf-app
 ```
 
 ### Parse serverless config file
@@ -66,10 +127,6 @@ inputs:
 
 > Notice: if you don't pass `-o` option, serverless.yml will not be rewrite, the parse result will just be outputed to terminal.
 
-## Environment
-
-For auto `release` action, you should setup `GH_TOKEN` and `NPM_TOKEN` secrets.
-
 ## Development
 
 All `git commit` mesage must follow below syntax:
@@ -96,13 +153,26 @@ Most of time, we just use `feat` and `fix`.
 For CI test, should copy `.env.example` to `.env.test`, then config below environment variables to yours:
 
 ```dotenv
+# tencent credentials
 TENCENT_SECRET_ID=xxx
 TENCENT_SECRET_KEY=xxx
-CODE_URL_COS=xxx
-```
 
-> Notice: `CODE_URL_COS` is a cos url for project code download in CI environment.
+# cos url for project code download in CI environment
+CODE_URL_COS=xxx
+# git ulr for git project
+CODE_URL_GIT=xxx
+
+# nextjs
+CODE_URL_COS_NEXTJS=xxx
+STATIC_URL_NEXTJS=xxx
+
+# nuxtjs
+CODE_URL_COS_NUXTJS=xxx
+STATIC_URL_NUXTJS=xxx
+```
 
 ## License
 
-MIT
+MIT License
+
+Copyright (c) 2020 Serverless Plus
