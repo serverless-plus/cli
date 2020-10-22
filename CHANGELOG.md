@@ -1,3 +1,10 @@
+## [0.4.4](https://github.com/serverless-plus/cli/compare/v0.4.3...v0.4.4) (2020-10-22)
+
+
+### Bug Fixes
+
+* support faas logs ([6307efc](https://github.com/serverless-plus/cli/commit/6307efca08dceefd56e90bcb5a94649b1e968a06))
+
 ## [0.4.3](https://github.com/serverless-plus/cli/compare/v0.4.2...v0.4.3) (2020-10-22)
 
 
