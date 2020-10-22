@@ -1,5 +1,12 @@
 import { Capi } from '@tencent-sdk/capi';
-import { Credential, WarmOptions, InvokeOptions, InvokeResponse } from '../../typings';
+import {
+  Credential,
+  WarmOptions,
+  InvokeOptions,
+  InvokeResponse,
+  LogsOptions,
+  TencentFaasLog,
+} from '../../typings';
 import { request } from '../../apis';
 import { Sls } from '../sls';
 import { GetEvent } from './events';
@@ -79,6 +86,25 @@ class Faas {
       context: JSON.stringify(GetEvent),
     });
     return true;
+  }
+
+  async getLogs({
+    name,
+    namespace = 'default',
+    qualifier = '$LATEST',
+    limit = 15,
+    reqId,
+  }: LogsOptions): Promise<TencentFaasLog[]> {
+    const { Data } = await request(this.capi, {
+      Action: 'GetFunctionLogs',
+      FunctionName: name,
+      Qualifier: qualifier,
+      Namespace: namespace,
+      Offset: 0,
+      Limit: limit,
+      FunctionRequestId: reqId,
+    });
+    return Data;
   }
 }
 

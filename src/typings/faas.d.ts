@@ -26,3 +26,28 @@ export interface WarmOptions {
   app?: string;
   type: string;
 }
+
+export interface LogsOptions {
+  name: string;
+  qualifier?: string;
+  namespace?: string;
+  region?: string;
+  limit?: number;
+  reqId?: string;
+}
+
+export interface TencentFaasLog {
+  FunctionName: string;
+  RetMsg: string;
+  RequestId: string;
+  StartTime: string;
+  RetCode: number;
+  Duration: number;
+  BillDuration: number;
+  MemUsage: number;
+  Log: string;
+  RetryNum: number;
+  InvokeFinished: number;
+  Level: string;
+  Source: string;
+}

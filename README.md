@@ -14,6 +14,7 @@ CLI tool for Serverless Plus
     - [config command](#config)
     - [clone command](#clone)
     - [faas command](#faas)
+      - [faas logs command](#faas-logs)
       - [faas invoke command](#faas-invoke)
       - [faas warm command](#faas-warm)
     - [parse command](#Parse-serverless-config-file)
@@ -71,6 +72,14 @@ Before using `faas` command, you should config tencent cloud credentilas in `.en
 ```
 TENCENT_SECRET_ID=xxx
 TENCENT_SECRET_KEY=xxx
+```
+
+#### faas logs
+
+Get cloud faas logs:
+
+```bash
+$ slsplus faas logs --name=scf-demo --limit=1
 ```
 
 #### faas invoke

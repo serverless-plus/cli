@@ -5,11 +5,11 @@ import { Credential } from '../typings';
 const configPath = join(homedir(), '.slsplus.conf');
 
 const getCredential = (): Credential | null => {
-  const { SLS_SECRET_ID, SLS_SECRET_KEY } = process.env;
-  if (SLS_SECRET_ID && SLS_SECRET_KEY) {
+  const { TENCENT_SECRET_ID, TENCENT_SECRET_KEY } = process.env;
+  if (TENCENT_SECRET_ID && TENCENT_SECRET_KEY) {
     return {
-      secretId: SLS_SECRET_ID,
-      secretKey: SLS_SECRET_KEY,
+      secretId: TENCENT_SECRET_ID,
+      secretKey: TENCENT_SECRET_KEY,
     };
   }
   return null;
