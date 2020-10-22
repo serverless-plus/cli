@@ -44,7 +44,7 @@ const faasCommand = (): void => {
         name: options.name,
         namespace: options.namespace,
         qualifier: options.qualifier,
-        context: options.event || JSON.stringify({}),
+        context: options.event,
         output: options.output,
       });
     });

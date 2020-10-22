@@ -2,6 +2,7 @@ export interface InvokeOptions {
   name: string;
   qualifier?: string;
   context: string;
+  event?: string;
   namespace?: string;
   type?: string;
 }
