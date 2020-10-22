@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/serverless-plus/cli/compare/v0.4.0...v0.4.1) (2020-10-22)
+
+
+### Bug Fixes
+
+* faas invoke command and update readme ([6888ab4](https://github.com/serverless-plus/cli/commit/6888ab4e92a029042b3d4a09522d447675d6dc04))
+
 # [0.4.0](https://github.com/serverless-plus/cli/compare/v0.3.6...v0.4.0) (2020-10-22)
 
 
