@@ -1,3 +1,10 @@
+## [0.4.2](https://github.com/serverless-plus/cli/compare/v0.4.1...v0.4.2) (2020-10-22)
+
+
+### Bug Fixes
+
+* add config command ([fcb75fc](https://github.com/serverless-plus/cli/commit/fcb75fc08291379cecfbe8e16f37810319c56551))
+
 ## [0.4.1](https://github.com/serverless-plus/cli/compare/v0.4.0...v0.4.1) (2020-10-22)
 
 
