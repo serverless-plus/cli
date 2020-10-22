@@ -1,3 +1,10 @@
+## [0.4.5](https://github.com/serverless-plus/cli/compare/v0.4.4...v0.4.5) (2020-10-22)
+
+
+### Bug Fixes
+
+* support event json file ([a718d99](https://github.com/serverless-plus/cli/commit/a718d99d32e10700c6c668b0967bff0826b6a9e5))
+
 ## [0.4.4](https://github.com/serverless-plus/cli/compare/v0.4.3...v0.4.4) (2020-10-22)
 
 
