@@ -1,3 +1,10 @@
+## [0.4.6](https://github.com/serverless-plus/cli/compare/v0.4.5...v0.4.6) (2020-10-23)
+
+
+### Bug Fixes
+
+* missing credentials token bug ([e966e6f](https://github.com/serverless-plus/cli/commit/e966e6f3fedbcea50e299c518679cddfd32cfa6e))
+
 ## [0.4.5](https://github.com/serverless-plus/cli/compare/v0.4.4...v0.4.5) (2020-10-22)
 
 
