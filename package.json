@@ -28,9 +28,9 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "ygsec && lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "npm run lint:fix && npm run prettier:fix"
+      "pre-push": "ygsec && npm run lint:fix && npm run prettier:fix"
     }
   },
   "lint-staged": {
@@ -81,6 +81,7 @@
     "@types/jest": "^26.0.13",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
+    "@ygkit/secure": "^0.0.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
