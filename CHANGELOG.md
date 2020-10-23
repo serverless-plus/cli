@@ -1,3 +1,10 @@
+## [0.4.7](https://github.com/serverless-plus/cli/compare/v0.4.6...v0.4.7) (2020-10-23)
+
+
+### Bug Fixes
+
+* credentials token ([ca11400](https://github.com/serverless-plus/cli/commit/ca11400d764d859503327118bd6ffae27e6b585b))
+
 ## [0.4.6](https://github.com/serverless-plus/cli/compare/v0.4.5...v0.4.6) (2020-10-23)
 
 
