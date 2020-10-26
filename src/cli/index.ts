@@ -8,18 +8,15 @@ import { parseCommand } from './parse';
 import { faasCommand } from './faas';
 import { appCommand } from './app';
 
-import pkg from '../../package.json';
+// eslint-disable-next-line
+const { version } = require('../../package.json');
 
 async function run() {
   // init environment
   await initialize();
 
   program.storeOptionsAsProperties(false).passCommandToAction(false);
-  program.version(
-    `Slsplus CLI Version: ${pkg.version}`,
-    '-v, --version',
-    'output the current version',
-  );
+  program.version(`Slsplus CLI Version: ${version}`, '-v, --version', 'output the current version');
 
   // inject sub commands
   configCommand();
