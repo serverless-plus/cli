@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/serverless-plus/cli/compare/v0.5.0...v0.5.1) (2020-10-26)
+
+
+### Bug Fixes
+
+* cli version ([a5265d5](https://github.com/serverless-plus/cli/commit/a5265d5e09ce29cdb2c77e5889859c9312661fba))
+
 # [0.5.0](https://github.com/serverless-plus/cli/compare/v0.4.7...v0.5.0) (2020-10-26)
 
 
