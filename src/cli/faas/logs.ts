@@ -16,7 +16,10 @@ async function logs(options: LogsCmdOptions): Promise<void> {
   const credential = getCredential();
 
   if (credential) {
-    const faas = new Faas(credential);
+    const faas = new Faas({
+      ...credential,
+      region: options.region,
+    });
     const spinner = ora();
     try {
       assert(options.name, '[OPTIONS] name is required');

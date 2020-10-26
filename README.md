@@ -17,6 +17,8 @@ CLI tool for Serverless Plus
       - [faas logs command](#faas-logs)
       - [faas invoke command](#faas-invoke)
       - [faas warm command](#faas-warm)
+    - [app command](#app)
+      - [app warm command](#app-warm)
     - [parse command](#Parse-serverless-config-file)
 
 ## Support Cloud Vendors
@@ -42,9 +44,11 @@ Options:
   -h, --help                    display help for command
 
 Commands:
+  config                        Config for slsplus cli
   clone <source> [destination]  clone a repository into a newly created directory
   parse [options]               parse serverless config file with costomize and environment variables replacement
-  faas
+  faas                          Operation for faas
+  app                           Operation for serverless application
   help [command]                display help for command
 
 Example call:
@@ -67,16 +71,11 @@ $ slsplus clone https://github.com/serverless-plus/cli
 
 ### faas
 
-Before using `faas` command, you should run `slsplus config` to config tencent cloud credentilas:
-
-```
-TENCENT_SECRET_ID=xxx
-TENCENT_SECRET_KEY=xxx
-```
+Before using `faas` command, you should run `slsplus config` to config tencent cloud credentilas.
 
 #### faas logs
 
-Get cloud faas logs:
+Get faas logs:
 
 ```bash
 $ slsplus faas logs --name=scf-demo --limit=1
@@ -84,7 +83,7 @@ $ slsplus faas logs --name=scf-demo --limit=1
 
 #### faas invoke
 
-Invoke cloud faas:
+Invoke faas:
 
 ```bash
 $ slsplus faas invoke --name=scf-demo
@@ -92,7 +91,7 @@ $ slsplus faas invoke --name=scf-demo
 
 #### faas warm
 
-Warm up cloud faas:
+Warm up faas:
 
 ```bash
 # name parameter is the name of cloud function
@@ -104,6 +103,19 @@ It also support to warm up application created by [serverless components](https:
 ```bash
 # name parameter is the name configured in serverless.yml
 $ slsplus faas warm-app --name=scf-app
+```
+
+### app
+
+Before using `app` command, you should run `slsplus config` to config tencent cloud credentilas.
+
+#### app warm
+
+Warm up serverless application:
+
+```bash
+# name parameter is the name configured in serverless.yml
+$ slsplus app warm --app=app-demo --name=scf-demo --stage=dev
 ```
 
 ### Parse serverless config file

@@ -1,4 +1,5 @@
 import { Capi } from '@tencent-sdk/capi';
+import chalk from 'chalk';
 import {
   Credential,
   WarmOptions,
@@ -8,7 +9,6 @@ import {
   TencentFaasLog,
 } from '../../typings';
 import { request } from '../../apis';
-import { Sls } from '../sls';
 import { GetEvent } from './events';
 
 class Faas {
@@ -49,43 +49,18 @@ class Faas {
     namespace = 'default',
     qualifier = '$LATEST',
   }: WarmOptions): Promise<boolean> {
-    await this.invoke({
-      name,
-      qualifier,
-      namespace,
-      context: JSON.stringify(GetEvent),
-    });
-    return true;
-  }
-
-  async warmUpByApp({ app = '', stage = 'dev', name }: WarmOptions): Promise<boolean> {
-    // 1. get instance
-    const sls = new Sls({
-      secretId: this.capi.options.SecretId,
-      secretKey: this.capi.options.SecretKey,
-      token: this.capi.options.Token,
-      region: this.capi.options.Region,
-    });
-
-    const instance = await sls.getInstance({
-      app,
-      stage,
-      name,
-    });
-
-    const functionName = instance?.state?.lambdaArn as string;
-    const qualifier = instance?.state?.lastVersion as string;
-    const region = instance?.state?.region;
-    const namespace = instance?.state[region]?.namespace;
-
-    // 2. invoke function for warming up
-    await this.invoke({
-      name: functionName,
-      qualifier,
-      namespace,
-      context: JSON.stringify(GetEvent),
-    });
-    return true;
+    try {
+      await this.invoke({
+        name,
+        qualifier,
+        namespace,
+        context: JSON.stringify(GetEvent),
+      });
+      return true;
+    } catch (e) {
+      chalk.yellow(`\n[Warning] Faas invoke fail: ${e.message}`);
+    }
+    return false;
   }
 
   async getLogs({
