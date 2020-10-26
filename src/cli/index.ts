@@ -6,6 +6,7 @@ import { configCommand } from './config';
 import { cloneCommand } from './clone';
 import { parseCommand } from './parse';
 import { faasCommand } from './faas';
+import { appCommand } from './app';
 
 import pkg from '../../package.json';
 
@@ -25,6 +26,7 @@ async function run() {
   cloneCommand();
   parseCommand();
   faasCommand();
+  appCommand();
 
   program.on('--help', () => {
     console.log('');

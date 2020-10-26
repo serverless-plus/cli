@@ -159,7 +159,7 @@ function createCodingCIJobReq({
       stage = stages.addStage('Warming up serverless project');
       steps = stage.addSteps();
       steps.addShell(
-        `slsplus faas warm-app --app=${slsOptions.app} --stage=${slsOptions.stage} --name=${slsOptions.name}`,
+        `slsplus app warm --app=${slsOptions.app} --stage=${slsOptions.stage} --name=${slsOptions.name}`,
       );
     }
   } else {

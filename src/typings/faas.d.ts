@@ -5,6 +5,7 @@ export interface InvokeOptions {
   event?: string;
   namespace?: string;
   type?: string;
+  region?: string;
 }
 
 export interface InvokeResponse {

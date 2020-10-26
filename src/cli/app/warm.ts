@@ -1,7 +1,7 @@
 import ora from 'ora';
 import chalk from 'chalk';
 import assert from 'assert';
-import { Faas } from '../../components/faas';
+import { Sls } from '../../components/sls';
 import { getCredential } from '../constants';
 import { WarmOptions } from '../../typings';
 
@@ -11,14 +11,16 @@ async function warm(options: WarmOptions): Promise<void> {
     const spinner = ora();
     try {
       assert(options.name, '[OPTIONS] name is required');
+      assert(options.app, '[OPTIONS] app is required');
       spinner.start(
-        `Warming up functtion ${options.name}, qualifier ${options.qualifier}, namespace ${options.namespace}`,
+        `Warming up application ${options.app}, stage ${options.stage}, name ${options.name}`,
       );
-      const faas = new Faas({
+      const sls = new Sls({
         ...credential,
         region: options.region,
       });
-      const isWarmUped = await faas.warmUp(options);
+      const isWarmUped = await sls.warmUp(options);
+
       if (isWarmUped) {
         spinner.succeed('Warm up success');
       } else {

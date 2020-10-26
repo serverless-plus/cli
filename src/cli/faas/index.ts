@@ -4,10 +4,11 @@ import { warm } from './warm';
 import { logs } from './logs';
 
 const faasCommand = (): void => {
-  const cli = program.command('faas');
+  const cli = program.command('faas').description('Operation for faas');
   cli
     .command('warm')
     .description('Warm up faas')
+    .option('-r, --region [region]', 'region of function', 'ap-guangzhou')
     .option('-n, --name [name]', 'function name')
     .option('-ns, --namespace [namespace]', 'namespace', 'default')
     .option('-q, --qualifier [qualifier]', 'function version', '$LATEST')
@@ -21,6 +22,7 @@ const faasCommand = (): void => {
   cli
     .command('warm-app')
     .description('Warm up serverless application')
+    .option('-r, --region [region]', 'region of function', 'ap-guangzhou')
     .option('-n, --name [name]', 'name config in serverless.yml')
     .option('-a, --app [app]', 'app name')
     .option('-s, --stage [stage]', 'app stage', 'dev')
@@ -34,37 +36,27 @@ const faasCommand = (): void => {
   cli
     .command('invoke')
     .description('Invoke faas')
+    .option('-r, --region [region]', 'region of function', 'ap-guangzhou')
     .option('-n, --name [name]', 'function name')
     .option('-ns, --namespace [namespace]', 'namespace', 'default')
     .option('-q, --qualifier [qualifier]', 'function version', '$LATEST')
     .option('-e, --event [event]', 'event json for invoking function')
     .option('-o, --output', 'output invoke result to invoke.log file', false)
     .action((options) => {
-      invoke({
-        name: options.name,
-        namespace: options.namespace,
-        qualifier: options.qualifier,
-        context: options.event,
-        output: options.output,
-      });
+      invoke(options);
     });
 
   cli
     .command('logs')
     .description('Get faas logs')
+    .option('-r, --region [region]', 'region of function', 'ap-guangzhou')
     .option('-n, --name [name]', 'function name')
     .option('-ns, --namespace [namespace]', 'namespace', 'default')
     .option('-q, --qualifier [qualifier]', 'function version', '$LATEST')
     .option('-l, --limit [limit]', 'get function logs count')
     .option('-o, --output', 'output invoke result to invoke.log file', false)
     .action((options) => {
-      logs({
-        name: options.name,
-        namespace: options.namespace,
-        qualifier: options.qualifier,
-        limit: options.limit,
-        output: options.output,
-      });
+      logs(options);
     });
 };
 
