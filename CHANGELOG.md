@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/serverless-plus/cli/compare/v0.4.7...v0.5.0) (2020-10-26)
+
+
+### Features
+
+* divide warm-app to app warm command ([65fb001](https://github.com/serverless-plus/cli/commit/65fb001484ab5f8b07f5d1302457454b2b5cf3f1))
+
 ## [0.4.7](https://github.com/serverless-plus/cli/compare/v0.4.6...v0.4.7) (2020-10-23)
 
 
