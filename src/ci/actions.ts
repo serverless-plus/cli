@@ -56,6 +56,7 @@ function createCodingCIJobReq({
   useGit = false,
   gitBranch = 'master',
   warmUp = false,
+  autoTriggerRuleOptions,
 }: CreateCodingCIJobOptions): CreateCodingCIJobRequest {
   if (!pipeline) {
     pipeline = new Pipeline();
@@ -172,8 +173,10 @@ function createCodingCIJobReq({
   req.ProjectId = projectId;
   req.Name = jobName;
   req.ExecuteIn = 'CVM';
-  req.TriggerMethodList = ['REF_CHANGE', 'MR_CHANGE'];
-  req.HookType = 'DEFAULT';
+  req.TriggerMethodList = autoTriggerRuleOptions ? ['REF_CHANGE', 'MR_CHANGE'] : [];
+  req.HookType = autoTriggerRuleOptions?.hookType || 'DEFAULT';
+  req.BranchSelector = autoTriggerRuleOptions?.branchSelector || undefined;
+  req.BranchRegex = autoTriggerRuleOptions?.branchRegex || undefined;
   req.JenkinsFileFromType = 'STATIC';
   req.JenkinsFileStaticContent = pipeline.toString();
   req.AutoCancelSameRevision = true;
