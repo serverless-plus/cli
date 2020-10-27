@@ -56,7 +56,7 @@ describe('Coding CI', () => {
       ProjectId: projectId,
       Name: 'slsplus-cli-test',
       ExecuteIn: 'CVM',
-      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
+      TriggerMethodList: [],
       HookType: 'DEFAULT',
       JenkinsFileFromType: 'STATIC',
       JenkinsFileStaticContent: expect.any(String),
@@ -93,7 +93,7 @@ describe('Coding CI', () => {
       ProjectId: projectId,
       Name: 'slsplus-cli-test',
       ExecuteIn: 'CVM',
-      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
+      TriggerMethodList: [],
       HookType: 'DEFAULT',
       JenkinsFileFromType: 'STATIC',
       JenkinsFileStaticContent: expect.any(String),
@@ -137,7 +137,7 @@ describe('Coding CI', () => {
       ProjectId: projectId,
       Name: 'slsplus-cli-test',
       ExecuteIn: 'CVM',
-      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
+      TriggerMethodList: [],
       HookType: 'DEFAULT',
       JenkinsFileFromType: 'STATIC',
       JenkinsFileStaticContent: expect.any(String),
@@ -211,7 +211,7 @@ describe('Coding CI', () => {
       ProjectId: projectId,
       Name: 'slsplus-cli-test-git',
       ExecuteIn: 'CVM',
-      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
+      TriggerMethodList: [],
       HookType: 'DEFAULT',
       JenkinsFileFromType: 'STATIC',
       JenkinsFileStaticContent: expect.any(String),
@@ -246,6 +246,134 @@ describe('Coding CI', () => {
           Sensitive: false,
         },
       ],
+    });
+  });
+
+  it('[createCodingCIJobReq using git with auto trigger by target branch] should get right request data', async () => {
+    const req = createCodingCIJobReq({
+      jobName: 'slsplus-cli-test-git',
+      projectId,
+      envs: credentialEnvs,
+      useGit: true,
+      gitBranch: 'dev',
+      autoTriggerRuleOptions: {
+        hookType: 'DEFAULT',
+        branchRegex: '',
+        branchSelector: 'test-branch',
+      },
+    });
+    expect(req).toEqual({
+      ProjectId: projectId,
+      Name: 'slsplus-cli-test-git',
+      ExecuteIn: 'CVM',
+      HookType: 'DEFAULT',
+      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
+      BranchSelector: 'test-branch',
+      JenkinsFileFromType: 'STATIC',
+      JenkinsFileStaticContent: expect.any(String),
+      AutoCancelSameRevision: true,
+      AutoCancelSameMergeRequest: true,
+      TriggerRemind: 'ALWAYS',
+      JobFromType: 'SERVERLESS',
+      DepotType: 'NONE',
+      DepotId: 0,
+      EnvList: credentialEnvs,
+    });
+  });
+  
+  it('[createCodingCIJobReq using git with auto trigger by all branch] should get right request data', async () => {
+    const req = createCodingCIJobReq({
+      jobName: 'slsplus-cli-test-git',
+      projectId,
+      envs: credentialEnvs,
+      useGit: true,
+      gitBranch: 'dev',
+      autoTriggerRuleOptions: {
+        hookType: 'BRANCH',
+        branchRegex: '^refs/heads/.+$',
+        branchSelector: '',
+      },
+    });
+    expect(req).toEqual({
+      ProjectId: projectId,
+      Name: 'slsplus-cli-test-git',
+      ExecuteIn: 'CVM',
+      HookType: 'BRANCH',
+      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
+      BranchRegex: '^refs/heads/.+$',
+      JenkinsFileFromType: 'STATIC',
+      JenkinsFileStaticContent: expect.any(String),
+      AutoCancelSameRevision: true,
+      AutoCancelSameMergeRequest: true,
+      TriggerRemind: 'ALWAYS',
+      JobFromType: 'SERVERLESS',
+      DepotType: 'NONE',
+      DepotId: 0,
+      EnvList: credentialEnvs,
+    });
+  });
+  
+  it('[createCodingCIJobReq using git with auto trigger by new tag] should get right request data', async () => {
+    const req = createCodingCIJobReq({
+      jobName: 'slsplus-cli-test-git',
+      projectId,
+      envs: credentialEnvs,
+      useGit: true,
+      gitBranch: 'dev',
+      autoTriggerRuleOptions: {
+        hookType: 'TAG',
+        branchRegex: '^refs/tags/.+$',
+        branchSelector: '',
+      },
+    });
+    expect(req).toEqual({
+      ProjectId: projectId,
+      Name: 'slsplus-cli-test-git',
+      ExecuteIn: 'CVM',
+      HookType: 'TAG',
+      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
+      BranchRegex: '^refs/tags/.+$',
+      JenkinsFileFromType: 'STATIC',
+      JenkinsFileStaticContent: expect.any(String),
+      AutoCancelSameRevision: true,
+      AutoCancelSameMergeRequest: true,
+      TriggerRemind: 'ALWAYS',
+      JobFromType: 'SERVERLESS',
+      DepotType: 'NONE',
+      DepotId: 0,
+      EnvList: credentialEnvs,
+    });
+  });
+  
+  it('[createCodingCIJobReq using git with auto trigger by custom regex rule] should get right request data', async () => {
+    const req = createCodingCIJobReq({
+      jobName: 'slsplus-cli-test-git',
+      projectId,
+      envs: credentialEnvs,
+      useGit: true,
+      gitBranch: 'dev',
+      autoTriggerRuleOptions: {
+        hookType: 'CUSTOM',
+        branchRegex: '^refs/heads/master$',
+        branchSelector: '',
+      },
+    });
+    expect(req).toEqual({
+      ProjectId: projectId,
+      Name: 'slsplus-cli-test-git',
+      ExecuteIn: 'CVM',
+      HookType: 'CUSTOM',
+      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
+      BranchRegex: '^refs/heads/master$',
+      JenkinsFileFromType: 'STATIC',
+      JenkinsFileStaticContent: expect.any(String),
+      AutoCancelSameRevision: true,
+      AutoCancelSameMergeRequest: true,
+      TriggerRemind: 'ALWAYS',
+      JobFromType: 'SERVERLESS',
+      DepotType: 'NONE',
+      DepotId: 0,
+      EnvList: credentialEnvs,
     });
   });
 });

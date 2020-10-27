@@ -289,6 +289,12 @@ export interface CIParseOptions {
   layerOptions?: LayerOptions;
 }
 
+export interface TriggerRuleOptions {
+  hookType: string;
+  branchRegex?: string;
+  branchSelector?: string;
+}
+
 export interface CreateCodingCIJobOptions {
   // 构建计划名称
   jobName: string;
@@ -316,6 +322,8 @@ export interface CreateCodingCIJobOptions {
   needBuild?: boolean;
   // 是否需要预热云函数
   warmUp?: boolean;
+  // 开启自动触发构建，定义触发构建的规则
+  autoTriggerRuleOptions?: TriggerRuleOptions;
 }
 
 export interface CreateCodingCIJobRequest {
@@ -386,12 +394,12 @@ export interface CreateCodingCIJobRequest {
   /**
    * hookType 为 DEFAULT 时须指定
    */
-  BranchSelector: string;
+  BranchSelector?: string;
 
   /**
    * hookType 为 CUSTOME 时须指定
    */
-  BranchRegex: string;
+  BranchRegex?: string;
 
   /**
    * JenkinsFileFromType 为 SCM 必填
