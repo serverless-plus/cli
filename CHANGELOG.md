@@ -1,3 +1,10 @@
+## [0.5.2](https://github.com/serverless-plus/cli/compare/v0.5.1...v0.5.2) (2020-10-27)
+
+
+### Bug Fixes
+
+* support auto trigger for git push code & update test case ([c49bea7](https://github.com/serverless-plus/cli/commit/c49bea794c0f2ecba78383561d7678ae94c6f077))
+
 ## [0.5.1](https://github.com/serverless-plus/cli/compare/v0.5.0...v0.5.1) (2020-10-26)
 
 
