@@ -173,10 +173,14 @@ function createCodingCIJobReq({
   req.ProjectId = projectId;
   req.Name = jobName;
   req.ExecuteIn = 'CVM';
-  req.TriggerMethodList = autoTriggerRuleOptions ? ['REF_CHANGE', 'MR_CHANGE'] : [];
+  req.TriggerMethodList = ['REF_CHANGE', 'MR_CHANGE'];
   req.HookType = autoTriggerRuleOptions?.hookType || 'DEFAULT';
-  req.BranchSelector = autoTriggerRuleOptions?.branchSelector || undefined;
-  req.BranchRegex = autoTriggerRuleOptions?.branchRegex || undefined;
+  if (autoTriggerRuleOptions?.branchSelector) {
+    req.BranchSelector = autoTriggerRuleOptions?.branchSelector || undefined;
+  }
+  if (autoTriggerRuleOptions?.branchRegex) {
+    req.BranchRegex = autoTriggerRuleOptions?.branchRegex || undefined;
+  }
   req.JenkinsFileFromType = 'STATIC';
   req.JenkinsFileStaticContent = pipeline.toString();
   req.AutoCancelSameRevision = true;

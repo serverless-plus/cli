@@ -56,7 +56,7 @@ describe('Coding CI', () => {
       ProjectId: projectId,
       Name: 'slsplus-cli-test',
       ExecuteIn: 'CVM',
-      TriggerMethodList: [],
+      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
       HookType: 'DEFAULT',
       JenkinsFileFromType: 'STATIC',
       JenkinsFileStaticContent: expect.any(String),
@@ -93,7 +93,7 @@ describe('Coding CI', () => {
       ProjectId: projectId,
       Name: 'slsplus-cli-test',
       ExecuteIn: 'CVM',
-      TriggerMethodList: [],
+      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
       HookType: 'DEFAULT',
       JenkinsFileFromType: 'STATIC',
       JenkinsFileStaticContent: expect.any(String),
@@ -137,7 +137,7 @@ describe('Coding CI', () => {
       ProjectId: projectId,
       Name: 'slsplus-cli-test',
       ExecuteIn: 'CVM',
-      TriggerMethodList: [],
+      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
       HookType: 'DEFAULT',
       JenkinsFileFromType: 'STATIC',
       JenkinsFileStaticContent: expect.any(String),
@@ -211,7 +211,7 @@ describe('Coding CI', () => {
       ProjectId: projectId,
       Name: 'slsplus-cli-test-git',
       ExecuteIn: 'CVM',
-      TriggerMethodList: [],
+      TriggerMethodList: ['REF_CHANGE', 'MR_CHANGE'],
       HookType: 'DEFAULT',
       JenkinsFileFromType: 'STATIC',
       JenkinsFileStaticContent: expect.any(String),
@@ -280,7 +280,7 @@ describe('Coding CI', () => {
       EnvList: credentialEnvs,
     });
   });
-  
+
   it('[createCodingCIJobReq using git with auto trigger by all branch] should get right request data', async () => {
     const req = createCodingCIJobReq({
       jobName: 'slsplus-cli-test-git',
@@ -312,7 +312,7 @@ describe('Coding CI', () => {
       EnvList: credentialEnvs,
     });
   });
-  
+
   it('[createCodingCIJobReq using git with auto trigger by new tag] should get right request data', async () => {
     const req = createCodingCIJobReq({
       jobName: 'slsplus-cli-test-git',
@@ -344,7 +344,7 @@ describe('Coding CI', () => {
       EnvList: credentialEnvs,
     });
   });
-  
+
   it('[createCodingCIJobReq using git with auto trigger by custom regex rule] should get right request data', async () => {
     const req = createCodingCIJobReq({
       jobName: 'slsplus-cli-test-git',

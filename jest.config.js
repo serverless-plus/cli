@@ -1,9 +1,11 @@
 const { join } = require('path');
 require('dotenv').config({ path: join(__dirname, '.env.test') });
 
+const isDebug = process.env.DEBUG === 'true';
+
 const config = {
   verbose: true,
-  silent: true,
+  silent: !isDebug,
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },

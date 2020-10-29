@@ -32,7 +32,7 @@ async function request(capi: Capi, options: RequestOptions): Promise<any | ApiEr
     const reqData = cleanEmptyValue(options) as RequestData;
     const res = await capi.request(reqData, {
       isV3: false,
-      debug: false,
+      debug: !!process.env.DEBUG,
     });
     const { Response } = res;
     if (Response && Response.Error && Response.Error.Code) {
