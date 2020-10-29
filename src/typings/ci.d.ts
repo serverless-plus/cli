@@ -261,6 +261,7 @@ export interface LayerOptions {
   stage: string;
   runtime: string;
   name?: string;
+  region?: string;
 }
 
 export interface SrcObject {
@@ -352,7 +353,7 @@ export interface CreateCodingCIJobRequest {
    *  CRON = 1 定时触发
    *  MR_CHANGE  MR变动触发
    */
-  TriggerMethodList: string[];
+  TriggerMethodList?: string[];
 
   /**
    * 代码更新触发匹配规则 DEFAULT,TAG,BRANCH,CUSTOM
