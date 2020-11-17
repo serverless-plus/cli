@@ -2,7 +2,7 @@
   "name": "@slsplus/cli",
   "version": "0.5.3",
   "description": "Serverless Plus CLI tool",
-  "main": "./dist/src/index.js",
+  "main": "./dist/index.js",
   "bin": {
     "slsplus": "bin/slsplus.js",
     "sp": "bin/slsplus.js"
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "jest",
-    "bundle": "tsc",
+    "build": "tsc",
     "format": "npm run lint && npm run prettier",
     "commitlint": "commitlint -f HEAD@{15}",
     "lint": "eslint --ext .js,.ts,.tsx .",
@@ -53,6 +53,7 @@
   "author": "yugasun",
   "license": "MIT",
   "dependencies": {
+    "@slsplus/migrate": "^0.0.1-alpha",
     "@tencent-sdk/capi": "^1.1.5",
     "@types/fs-extra": "^9.0.1",
     "@types/inquirer": "^7.3.1",

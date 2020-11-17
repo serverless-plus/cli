@@ -5,12 +5,20 @@ const deepClone = (obj: AnyObject): AnyObject => {
   return JSON.parse(JSON.stringify(obj));
 };
 
-const getType = (obj: AnyObject): string => {
+const typeOf = (obj: AnyObject): string => {
   return Object.prototype.toString.call(obj).slice(8, -1);
 };
 
+const isUndefined = (val: any): boolean => {
+  return val === undefined;
+};
+
 const isObject = (obj: AnyObject): boolean => {
-  return getType(obj) === 'Object';
+  return typeOf(obj) === 'Object';
+};
+
+const isEmptyObject = (obj: AnyObject): boolean => {
+  return Object.keys(obj).length === 0;
 };
 
 const mergeObject = (source: AnyObject, target: AnyObject): AnyObject => {
@@ -69,4 +77,15 @@ const getFileExt = (filePath: string): string => {
   }
 };
 
-export { isObject, deepClone, isYamlPath, isJsonPath, fileExist, getType, mergeObject, getFileExt };
+export {
+  isObject,
+  deepClone,
+  isYamlPath,
+  isJsonPath,
+  fileExist,
+  typeOf,
+  mergeObject,
+  getFileExt,
+  isUndefined,
+  isEmptyObject,
+};

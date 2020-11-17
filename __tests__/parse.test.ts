@@ -2,7 +2,7 @@ import { join } from 'path';
 import { removeSync, outputFileSync } from 'fs-extra';
 import { parse, readAndParse } from '../src/cli/parse';
 import { fileExist } from '../src/utils';
-import { AnyObject } from '../src/typings/index.d';
+import { AnyObject } from '../src/typings';
 interface ConfigFileContent extends AnyObject {
   yml: string;
   yaml: string;
@@ -27,7 +27,7 @@ inputs:
     exclude:
       - .env
   region: \${env:REGION}
-  apigatewayConf:
+  apigw:
     protocols:
       - http
       - https
@@ -44,7 +44,7 @@ inputs:
     exclude:
       - .env
   region: \${env:REGION}
-  apigatewayConf:
+  apigw:
     protocols:
       - http
       - https
@@ -61,7 +61,7 @@ inputs:
         "exclude": [".env"]
       },
       "region": "\${env:REGION}",
-      "apigatewayConf": {
+      "apigw": {
         "protocols": [
           "http",
           "https"
@@ -114,7 +114,7 @@ inputs:
             exclude: ['.env'],
           },
           region: 'ap-guangzhou',
-          apigatewayConf: {
+          apigw: {
             protocols: ['http', 'https'],
           },
         },
@@ -182,7 +182,7 @@ inputs:
               version: '${output:${stage}:${app}:appDemo-layer.version}',
             },
           ],
-          apigatewayConf: {
+          apigw: {
             protocols: ['http', 'https'],
           },
         },
@@ -207,7 +207,7 @@ inputs:
             exclude: ['.env'],
           },
           region: 'ap-guangzhou',
-          apigatewayConf: {
+          apigw: {
             protocols: ['http', 'https'],
           },
         },
@@ -225,7 +225,7 @@ inputs:
               exclude: ['.env'],
             },
             region: 'ap-guangzhou',
-            apigatewayConf: {
+            apigw: {
               protocols: ['http', 'https'],
             },
           },
@@ -253,7 +253,7 @@ inputs:
             exclude: ['.env'],
           },
           region: 'ap-guangzhou',
-          apigatewayConf: {
+          apigw: {
             protocols: ['http', 'https'],
           },
         },

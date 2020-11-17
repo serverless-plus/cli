@@ -196,6 +196,7 @@ const parseCommand = (): void => {
         slsOptionsJson: options.slsOptions,
         layerOptionsJson: options.layerOptions,
         autoCreate: options.autoCreate,
+        component: options.component,
       });
     });
 };
