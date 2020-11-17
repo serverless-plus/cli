@@ -20,6 +20,7 @@ CLI tool for Serverless Plus
     - [app command](#app)
       - [app warm command](#app-warm)
     - [parse command](#Parse-serverless-config-file)
+    - [migrate command](#Migrate-serverless-config-file)
 
 ## Support Cloud Vendors
 
@@ -153,7 +154,85 @@ inputs:
       - https
 ```
 
-> Notice: if you don't pass `-o` option, serverless.yml will not be rewrite, the parse result will just be outputed to terminal.
+### Migrate serverless config file
+
+```bash
+$ slsplus migrate
+```
+
+This command will auto migrate your old yaml config to latest version.
+
+For example, before is:
+
+```yaml
+org: orgDemo
+app: appDemo
+stage: dev
+component: express
+name: expressDemo
+
+inputs:
+  src:
+    src: ./
+    exclude:
+      - .env
+  region: ap-guangzhou
+  functionName: expressDemo
+  layers:
+    - name: layer-test
+      version: 1
+  serviceId: service-abcdefg
+  serviceName: express_api
+  functionConf:
+    timeout: 10
+    environment:
+      variables:
+        TEST: 1
+    tags:
+      TEST: 1
+  apigatewayConf:
+    enableCORS: true
+    serviceDesc: test
+    protocols:
+      - http
+      - https
+```
+
+If `process.env.REGION=ap-guangzhou`, after parsing, the `serverless.yml` will be:
+
+```yaml
+org: orgDemo
+app: appDemo
+stage: dev
+component: express
+name: expressDemo
+inputs:
+  src:
+    src: ./
+    exclude:
+      - .env
+  region: ap-guangzhou
+  faas:
+    name: expressDemo
+    timeout: 10
+    environments:
+      - envKey: TEST
+        envVal: 1
+    tags:
+      - tagKey: TEST
+        tagVal: 1
+    layers:
+      - name: layer-test
+        version: 1
+  apigw:
+    id: service-abcdefg
+    name: express_api
+    description: test
+    cors: true
+    protocols:
+      - http
+      - https
+```
 
 ## Development
 
