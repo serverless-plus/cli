@@ -25,7 +25,7 @@ async function invoke(options: CliInvokeOptions): Promise<void> {
       spinner.start(
         `Invoking functtion ${options.name}, qualifier ${options.qualifier}, namespace ${options.namespace}`,
       );
-      const { context: inputEvent } = options;
+      const { event: inputEvent } = options;
       let eventJson = '';
       if (inputEvent) {
         try {

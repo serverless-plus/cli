@@ -12,6 +12,7 @@ CLI tool for Serverless Plus
   - [Installation](#installation)
   - [Usage](#usage)
     - [config command](#config)
+    - [init command](#init)
     - [clone command](#clone)
     - [faas command](#faas)
       - [faas logs command](#faas-logs)
@@ -46,6 +47,7 @@ Options:
 
 Commands:
   config                        Config for slsplus cli
+  init                          Initialize command for serverless project
   clone <source> [destination]  clone a repository into a newly created directory
   parse [options]               parse serverless config file with costomize and environment variables replacement
   faas                          Operation for faas
@@ -63,6 +65,16 @@ Config credentils for vendors:
 ```bash
 $ slsplus config
 ```
+
+### init
+
+Initialize command for serverless project:
+
+```bash
+$ slsplus init -u
+```
+
+> It will start an UI config server for serverless project.
 
 ### clone
 

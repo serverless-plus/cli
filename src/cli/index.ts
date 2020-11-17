@@ -8,6 +8,7 @@ import { parseCommand } from './parse';
 import { faasCommand } from './faas';
 import { appCommand } from './app';
 import { migrateCommand } from './migrate';
+import { initCommand } from './init';
 
 // eslint-disable-next-line
 const { version } = require('../../package.json');
@@ -26,6 +27,7 @@ async function run() {
   faasCommand();
   appCommand();
   migrateCommand();
+  initCommand();
 
   program.on('--help', () => {
     console.log('');

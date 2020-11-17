@@ -3,8 +3,8 @@ import { prompt } from 'inquirer';
 import YAML from 'js-yaml';
 import fse from 'fs-extra';
 import chalk from 'chalk';
-import { fileExist } from '../utils';
-import { configPath } from './constants';
+import { fileExist } from '../../utils';
+import { configPath } from '../constants';
 
 const questions = [
   {
