@@ -23,4 +23,29 @@ function getDefaultConfig(component = 'scf'): ComponentConfig {
   };
 }
 
-export { getDefaultConfig };
+const BASE_COMPONENTS = ['scf'];
+
+const FRAMEWORK_COMPONENTS = [
+  'express',
+  'koa',
+  'egg',
+  'nextjs',
+  'nuxtjs',
+  'nestjs',
+  'flask',
+  'django',
+  'laravel',
+  'thinkphp',
+];
+
+const COMPONENTS = [...BASE_COMPONENTS, ...FRAMEWORK_COMPONENTS];
+
+const isBaseComponent = (name: string) => {
+  return BASE_COMPONENTS.indexOf(name) !== -1;
+};
+
+const isFrameworkComponent = (name = 'framework') => {
+  return FRAMEWORK_COMPONENTS.indexOf(name) !== -1;
+};
+
+export { COMPONENTS, getDefaultConfig, isBaseComponent, isFrameworkComponent };

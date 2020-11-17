@@ -1,4 +1,4 @@
-import { AnyObject, SlsInputs } from './index.d';
+import { AnyObject, SlsInputs } from '.';
 
 export interface GetInstanceRequest {
   stage: string;

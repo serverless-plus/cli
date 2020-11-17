@@ -14,7 +14,7 @@
     "lib": ["esnext", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "paths": {
       "*": ["typings/*"]
     },
@@ -25,5 +25,5 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "include": ["src", "src/typings/**/*.d.ts", "src/cli/.ts"]
+  "include": ["src", "src/typings/**/*.d.ts", "src/cli/migrate.ts"]
 }
