@@ -54,6 +54,7 @@
   "license": "MIT",
   "dependencies": {
     "@slsplus/migrate": "^0.0.1-alpha",
+    "@slsplus/ui": "^0.0.1-beta-4",
     "@tencent-sdk/capi": "^1.1.5",
     "@types/fs-extra": "^9.0.1",
     "@types/inquirer": "^7.3.1",

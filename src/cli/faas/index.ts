@@ -20,20 +20,6 @@ const faasCommand = (): void => {
     });
 
   cli
-    .command('warm-app')
-    .description('Warm up serverless application')
-    .option('-r, --region [region]', 'region of function', 'ap-guangzhou')
-    .option('-n, --name [name]', 'name config in serverless.yml')
-    .option('-a, --app [app]', 'app name')
-    .option('-s, --stage [stage]', 'app stage', 'dev')
-    .action((options) => {
-      warm({
-        type: 'app',
-        ...options,
-      });
-    });
-
-  cli
     .command('invoke')
     .description('Invoke faas')
     .option('-r, --region [region]', 'region of function', 'ap-guangzhou')
