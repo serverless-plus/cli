@@ -1,8 +1,10 @@
 import { Capi } from '@tencent-sdk/capi';
 import chalk from 'chalk';
 import { Credential, Instance, GetInstanceRequest, WarmOptions } from '../../typings';
-import { request } from '../../apis';
 import { Faas } from '../faas';
+import { TAPI } from '../../apis';
+
+const { request } = TAPI;
 
 class Sls {
   capi: Capi;

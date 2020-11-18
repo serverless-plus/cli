@@ -1,5 +1,5 @@
 import { sleep } from '@ygkit/request';
-import { CodingCI } from '../../src';
+import { CodingCI } from '../../src/ci/coding';
 
 describe('Coding CI', () => {
   const ci = new CodingCI({

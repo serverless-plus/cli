@@ -8,8 +8,10 @@ import {
   LogsOptions,
   TencentFaasLog,
 } from '../../typings';
-import { request } from '../../apis';
 import { GetEvent } from './events';
+import { TAPI } from '../../apis';
+
+const { request } = TAPI;
 
 class Faas {
   capi: Capi;

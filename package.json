@@ -44,8 +44,8 @@
     ]
   },
   "keywords": [
-    "slsplus",
     "cli",
+    "slsplus",
     "serverless",
     "serverless-framework",
     "serverless-components"

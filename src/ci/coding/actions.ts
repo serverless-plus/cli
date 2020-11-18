@@ -8,7 +8,8 @@ import {
   CreateProjectWithTemplateOptions,
   CreateCodingCIJobOptions,
   TriggerCodingCIBuildOptions,
-} from '../typings/ci';
+  CIJobEnv,
+} from '../../typings/ci';
 
 import { Pipeline } from './models/pipeline';
 
@@ -195,7 +196,7 @@ function createCodingCIJobReq({
     req.DepotId = 0;
   }
 
-  req.EnvList = envs.map((item) => {
+  req.EnvList = envs.map((item: CIJobEnv) => {
     item.Sensitive = item.Sensitive !== false;
     return item;
   });
@@ -213,7 +214,7 @@ function triggerCodingCIBuildReq({
   const req = {} as TriggerCodingCIBuildRequest;
   req.JobId = jobId;
   req.Revision = 'master';
-  req.ParamList = envs.map((item) => {
+  req.ParamList = envs.map((item: CIJobEnv) => {
     item.Sensitive = item.Sensitive !== false;
     return item;
   });

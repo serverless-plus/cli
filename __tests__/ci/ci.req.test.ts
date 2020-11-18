@@ -4,7 +4,7 @@ import {
   triggerCodingCIBuildReq,
   describeCodingCIBuildStageReq,
   describeCodingCIBuildLogReq,
-} from '../../src/ci/actions';
+} from '../../src/ci/coding/actions';
 
 describe('Coding CI', () => {
   const credentialEnvs = [
