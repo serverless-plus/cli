@@ -1,3 +1,16 @@
+# [0.6.0](https://github.com/serverless-plus/cli/compare/v0.5.3...v0.6.0) (2020-11-18)
+
+
+### Bug Fixes
+
+* change dir structure ([d30ec80](https://github.com/serverless-plus/cli/commit/d30ec8004812e02c5ac4e0f7f61186ca34fc3509))
+* support old yaml migrate ([08d6e9d](https://github.com/serverless-plus/cli/commit/08d6e9dc09522d950137ea016a7c9348fbd99e3b))
+
+
+### Features
+
+* support ui config ([a455ca5](https://github.com/serverless-plus/cli/commit/a455ca59cd6c1f43b9e0447aa48ebe54822efd12))
+
 ## [0.5.3](https://github.com/serverless-plus/cli/compare/v0.5.2...v0.5.3) (2020-10-29)
 
 
