@@ -1,4 +1,4 @@
-import { Environments, PipelineInterface, StagesInterface } from '../../typings/ci';
+import { Environments, PipelineInterface, StagesInterface } from '../../../typings/ci';
 import { Stages } from './stages';
 
 class Pipeline implements PipelineInterface {

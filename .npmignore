@@ -19,3 +19,5 @@ commitlint.config.js
 # source code
 /src
 !/dist/src
+
+tsconfig.json
