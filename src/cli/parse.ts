@@ -4,7 +4,7 @@ import YAML from 'js-yaml';
 import traverse from 'traverse';
 import chalk from 'chalk';
 import { program } from 'commander';
-import { fileExist, isJsonPath, isYamlPath, getFileExt } from '../utils';
+import { fileExist, isJsonPath, isYamlPath, getFileExt, mergeObject } from '../utils';
 import { AnyObject, ParseOptions } from '../typings';
 import { getDefaultConfig } from '../components/config';
 import { createLayerConfig } from '../components/layer';
@@ -153,7 +153,7 @@ export function parse({
   }
 
   const { data: parseObj, type } = readAndParse(inputPath, autoCreate);
-  let slsOptions = Object.assign(parseObj, JSON.parse(slsOptionsJson));
+  let slsOptions = mergeObject(parseObj, JSON.parse(slsOptionsJson));
 
   slsOptions = generateLayerYaml(rootDir, slsOptions, layerOptionsJson);
 
