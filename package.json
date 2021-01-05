@@ -54,7 +54,7 @@
   "author": "yugasun",
   "license": "MIT",
   "dependencies": {
-    "@slsplus/migrate": "^0.0.1-alpha",
+    "@slsplus/migrate": "^0.0.1-beta-7",
     "@slsplus/ui": "^0.0.1-beta-4",
     "@tencent-sdk/capi": "^1.1.5",
     "@types/fs-extra": "^9.0.1",

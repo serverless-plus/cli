@@ -42,6 +42,7 @@ module.exports = {
         exceptions: ['e', 'i', 'n', 't', 'x', 'y', 'z', '_', '$'],
       },
     ],
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-alert': 'error',

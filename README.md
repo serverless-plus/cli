@@ -91,7 +91,7 @@ Before using `faas` command, you should run `slsplus config` to config tencent c
 Get faas logs:
 
 ```bash
-$ slsplus faas logs --name=scf-demo --limit=1
+$ slsplus faas logs --name=scfdemo --limit=1
 ```
 
 #### faas invoke
@@ -99,7 +99,7 @@ $ slsplus faas logs --name=scf-demo --limit=1
 Invoke faas:
 
 ```bash
-$ slsplus faas invoke --name=scf-demo
+$ slsplus faas invoke --name=scfdemo
 ```
 
 #### faas warm
@@ -108,14 +108,7 @@ Warm up faas:
 
 ```bash
 # name parameter is the name of cloud function
-$ slsplus faas warm --name=scf-demo
-```
-
-It also support to warm up application created by [serverless components](https://github.com/serverless/components):
-
-```bash
-# name parameter is the name configured in serverless.yml
-$ slsplus faas warm-app --name=scf-app
+$ slsplus faas warm --name=scfdemo
 ```
 
 ### app
@@ -128,7 +121,7 @@ Warm up serverless application:
 
 ```bash
 # name parameter is the name configured in serverless.yml
-$ slsplus app warm --app=app-demo --name=scf-demo --stage=dev
+$ slsplus app warm --app=appname --name=scfdemo --stage=dev
 ```
 
 ### Parse serverless config file
