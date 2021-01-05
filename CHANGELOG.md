@@ -1,3 +1,10 @@
+## [0.6.1](https://github.com/serverless-plus/cli/compare/v0.6.0...v0.6.1) (2021-01-05)
+
+
+### Bug Fixes
+
+* **parse:** update sls config merge strategy ([#11](https://github.com/serverless-plus/cli/issues/11)) ([54d7e91](https://github.com/serverless-plus/cli/commit/54d7e91c441832bf326cc4fb2f3c7935a39d9b1f))
+
 # [0.6.0](https://github.com/serverless-plus/cli/compare/v0.5.3...v0.6.0) (2020-11-18)
 
 
