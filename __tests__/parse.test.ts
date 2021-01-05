@@ -135,6 +135,10 @@ inputs:
         name: 'expressDemo',
         inputs: {
           src: './',
+          region: 'ap-guangzhou',
+          apigw: {
+            protocols: ['http', 'https'],
+          },
         },
       });
     });
@@ -154,6 +158,10 @@ inputs:
         inputs: {
           src: './',
           test: 1,
+          region: 'ap-guangzhou',
+          apigw: {
+            protocols: ['http', 'https'],
+          },
         },
       });
     });

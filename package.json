@@ -11,6 +11,7 @@
     "access": "public"
   },
   "scripts": {
+    "run:cli": "ts-node ./src/cli",
     "test": "jest",
     "build": "tsc",
     "format": "npm run lint && npm run prettier",
@@ -53,7 +54,7 @@
   "author": "yugasun",
   "license": "MIT",
   "dependencies": {
-    "@slsplus/migrate": "^0.0.1-alpha",
+    "@slsplus/migrate": "^0.0.1-beta-7",
     "@slsplus/ui": "^0.0.1-beta-4",
     "@tencent-sdk/capi": "^1.1.5",
     "@types/fs-extra": "^9.0.1",
@@ -69,8 +70,7 @@
     "inquirer": "^7.3.3",
     "js-yaml": "^3.14.0",
     "ora": "^5.1.0",
-    "traverse": "^0.6.6",
-    "tslib": "^2.0.1"
+    "traverse": "^0.6.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
@@ -93,6 +93,7 @@
     "prettier": "^1.19.1",
     "semantic-release": "^17.0.4",
     "ts-jest": "^26.3.0",
+    "ts-node": "^9.1.1",
     "typescript": "^4.0.2",
     "typescript-json-schema": "^0.43.0"
   },

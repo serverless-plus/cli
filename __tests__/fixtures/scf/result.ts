@@ -14,14 +14,14 @@ export default {
     timeout: 10,
     environments: [
       {
-        envKey: 'TEST',
-        envVal: 1,
+        key: 'TEST',
+        value: 1,
       },
     ],
     tags: [
       {
-        tagKey: 'TEST',
-        tagVal: 1,
+        key: 'TEST',
+        value: 1,
       },
     ],
     layers: [

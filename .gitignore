@@ -21,3 +21,5 @@ package-lock.json
 yarn.lock
 tsconfig.tsbuildinfo
 !.env.example
+
+serverless.yml
