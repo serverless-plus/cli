@@ -58,12 +58,14 @@ Example call:
   $ slsplus --help
 ```
 
+> Notice: Below examples will use `sp` instead of `slsplus`.
+
 ### config
 
 Config credentils for vendors:
 
 ```bash
-$ slsplus config
+$ sp config
 ```
 
 ### init
@@ -71,7 +73,7 @@ $ slsplus config
 Initialize command for serverless project:
 
 ```bash
-$ slsplus init -u
+$ sp init -u
 ```
 
 > It will start an UI config server for serverless project.
@@ -79,19 +81,19 @@ $ slsplus init -u
 ### clone
 
 ```bash
-$ slsplus clone https://github.com/serverless-plus/cli
+$ sp clone https://github.com/serverless-plus/cli
 ```
 
 ### faas
 
-Before using `faas` command, you should run `slsplus config` to config tencent cloud credentilas.
+Before using `faas` command, you should run `sp config` to config tencent cloud credentilas.
 
 #### faas logs
 
 Get faas logs:
 
 ```bash
-$ slsplus faas logs --name=scfdemo --limit=1
+$ sp faas logs --name=scfdemo --limit=1
 ```
 
 #### faas invoke
@@ -99,7 +101,13 @@ $ slsplus faas logs --name=scfdemo --limit=1
 Invoke faas:
 
 ```bash
-$ slsplus faas invoke --name=scfdemo
+$ sp faas invoke --name=scfdemo
+```
+
+Invoke with event:
+
+```bash
+$ sp faas invoke --name=scfdemo --event=./event.json
 ```
 
 #### faas warm
@@ -108,12 +116,12 @@ Warm up faas:
 
 ```bash
 # name parameter is the name of cloud function
-$ slsplus faas warm --name=scfdemo
+$ sp faas warm --name=scfdemo
 ```
 
 ### app
 
-Before using `app` command, you should run `slsplus config` to config tencent cloud credentilas.
+Before using `app` command, you should run `sp config` to config tencent cloud credentilas.
 
 #### app warm
 
@@ -121,13 +129,13 @@ Warm up serverless application:
 
 ```bash
 # name parameter is the name configured in serverless.yml
-$ slsplus app warm --app=appname --name=scfdemo --stage=dev
+$ sp app warm --app=appname --name=scfdemo --stage=dev
 ```
 
 ### Parse serverless config file
 
 ```bash
-$ slsplus parse -o -s '{"src":"./"}'
+$ sp parse -o -s '{"src":"./"}'
 ```
 
 Parse command will parse serverless config file with costomize and environment variables replacement.
@@ -136,15 +144,7 @@ For example, before is:
 
 ```yaml
 inputs:
-  src:
-    src: ./
-    exclude:
-      - .env
   region: ${env:REGION}
-  apigatewayConf:
-    protocols:
-      - http
-      - https
 ```
 
 If `process.env.REGION=ap-guangzhou`, after parsing, the `serverless.yml` will be:
@@ -153,10 +153,6 @@ If `process.env.REGION=ap-guangzhou`, after parsing, the `serverless.yml` will b
 inputs:
   src: ./
   region: ap-guangzhou
-  apigatewayConf:
-    protocols:
-      - http
-      - https
 ```
 
 ### Migrate serverless config file
@@ -166,78 +162,6 @@ $ slsplus migrate
 ```
 
 This command will auto migrate your old yaml config to latest version.
-
-For example, before is:
-
-```yaml
-org: orgDemo
-app: appDemo
-stage: dev
-component: express
-name: expressDemo
-
-inputs:
-  src:
-    src: ./
-    exclude:
-      - .env
-  region: ap-guangzhou
-  functionName: expressDemo
-  layers:
-    - name: layer-test
-      version: 1
-  serviceId: service-abcdefg
-  serviceName: express_api
-  functionConf:
-    timeout: 10
-    environment:
-      variables:
-        TEST: 1
-    tags:
-      TEST: 1
-  apigatewayConf:
-    enableCORS: true
-    serviceDesc: test
-    protocols:
-      - http
-      - https
-```
-
-If `process.env.REGION=ap-guangzhou`, after parsing, the `serverless.yml` will be:
-
-```yaml
-org: orgDemo
-app: appDemo
-stage: dev
-component: express
-name: expressDemo
-inputs:
-  src:
-    src: ./
-    exclude:
-      - .env
-  region: ap-guangzhou
-  faas:
-    name: expressDemo
-    timeout: 10
-    environments:
-      - envKey: TEST
-        envVal: 1
-    tags:
-      - tagKey: TEST
-        tagVal: 1
-    layers:
-      - name: layer-test
-        version: 1
-  apigw:
-    id: service-abcdefg
-    name: express_api
-    description: test
-    cors: true
-    protocols:
-      - http
-      - https
-```
 
 ## Development
 
