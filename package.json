@@ -36,12 +36,10 @@
   },
   "lint-staged": {
     "**/*.{js,ts,tsx}": [
-      "npm run lint:fix",
-      "git add ."
+      "npm run lint:fix"
     ],
     "**/*.{css,html,js,ts,json,md,yaml,yml}": [
-      "npm run prettier:fix",
-      "git add ."
+      "npm run prettier:fix"
     ]
   },
   "keywords": [
@@ -54,6 +52,9 @@
   "author": "yugasun",
   "license": "MIT",
   "dependencies": {
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
     "@slsplus/migrate": "^0.0.1-beta-7",
     "@slsplus/ui": "^0.0.1-beta-4",
     "@tencent-sdk/capi": "^1.1.5",
@@ -70,6 +71,7 @@
     "inquirer": "^7.3.3",
     "js-yaml": "^3.14.0",
     "ora": "^5.1.0",
+    "rollup": "^2.42.4",
     "traverse": "^0.6.6"
   },
   "devDependencies": {

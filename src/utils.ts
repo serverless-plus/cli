@@ -77,6 +77,8 @@ const getFileExt = (filePath: string): string => {
   }
 };
 
+const cwdDir = process.cwd();
+
 export {
   isObject,
   deepClone,
@@ -88,4 +90,5 @@ export {
   getFileExt,
   isUndefined,
   isEmptyObject,
+  cwdDir,
 };

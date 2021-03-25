@@ -9,6 +9,7 @@ import { faasCommand } from './faas';
 import { appCommand } from './app';
 import { migrateCommand } from './migrate';
 import { initCommand } from './init';
+import { bundleCommand } from './bundle';
 
 // eslint-disable-next-line
 const { version } = require('../../package.json');
@@ -28,6 +29,7 @@ async function run() {
   appCommand();
   migrateCommand();
   initCommand();
+  bundleCommand();
 
   program.on('--help', () => {
     console.log('');
