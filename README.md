@@ -11,17 +11,18 @@ CLI tool for Serverless Plus
   - [Support Cloud Vendors](#support-cloud-vendors)
   - [Installation](#installation)
   - [Usage](#usage)
-    - [config command](#config)
-    - [init command](#init)
-    - [clone command](#clone)
-    - [faas command](#faas)
-      - [faas logs command](#faas-logs)
-      - [faas invoke command](#faas-invoke)
-      - [faas warm command](#faas-warm)
-    - [app command](#app)
-      - [app warm command](#app-warm)
-    - [parse command](#Parse-serverless-config-file)
-    - [migrate command](#Migrate-serverless-config-file)
+    - [config](#config)
+    - [init](#init)
+    - [clone](#clone)
+    - [faas](#faas)
+      - [faas logs](#faas-logs)
+      - [faas invoke](#faas-invoke)
+      - [faas warm](#faas-warm)
+    - [bundle](#bundle)
+    - [app](#app)
+      - [app warm](#app-warm)
+    - [parse](#Parse-serverless-config-file)
+    - [migrate](#Migrate-serverless-config-file)
 
 ## Support Cloud Vendors
 
@@ -47,11 +48,13 @@ Options:
 
 Commands:
   config                        Config for slsplus cli
-  init                          Initialize command for serverless project
   clone <source> [destination]  clone a repository into a newly created directory
   parse [options]               parse serverless config file with costomize and environment variables replacement
   faas                          Operation for faas
   app                           Operation for serverless application
+  migrate [options]             Migrate old serverless config to uniform config
+  init [options]                Initialize command for serverless project
+  bundle [options]              Bundle command for serverless project
   help [command]                display help for command
 
 Example call:
@@ -118,6 +121,16 @@ Warm up faas:
 # name parameter is the name of cloud function
 $ sp faas warm --name=scfdemo
 ```
+
+### bundle
+
+Before using `bundle` command, you can bundle your project with dependencies into one file, so you need not to upload `node_modules` directory.
+
+```
+$ sp bundle --input=app.js --file=./sls.js
+```
+
+If you do not pass `--file` option, it will be bundled to `sls.prod.js` by default.
 
 ### app
 
