@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/serverless-plus/cli/compare/v0.6.1...v0.7.0) (2021-03-25)
+
+
+### Features
+
+* support bundle command ([b3f994e](https://github.com/serverless-plus/cli/commit/b3f994e85d9a57a1a3180777a0a5417692dc9595))
+
 ## [0.6.1](https://github.com/serverless-plus/cli/compare/v0.6.0...v0.6.1) (2021-01-05)
 
 
