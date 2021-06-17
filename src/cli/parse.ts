@@ -190,6 +190,7 @@ const parseCommand = (): void => {
     .option('-c, --component [component]', 'serverless component name')
     .option('-s, --sls-options [slsOptions]', 'serverless config')
     .option('-l, --layer-options [layerOptions]', 'serverless layer config')
+    .option('-or, --override [override]', 'override serverless config')
     .action((options) => {
       parse({
         rootDir: options.rootDir,
@@ -200,6 +201,7 @@ const parseCommand = (): void => {
         layerOptionsJson: options.layerOptions,
         autoCreate: options.autoCreate,
         component: options.component,
+        override: options.override,
       });
     });
 };
