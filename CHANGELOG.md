@@ -1,3 +1,10 @@
+## [0.7.2](https://github.com/serverless-plus/cli/compare/v0.7.1...v0.7.2) (2021-06-17)
+
+
+### Bug Fixes
+
+* **parse:** add override command ([#14](https://github.com/serverless-plus/cli/issues/14)) ([54b2682](https://github.com/serverless-plus/cli/commit/54b26826dd48fe1111931e50cf5529808660a243))
+
 ## [0.7.1](https://github.com/serverless-plus/cli/compare/v0.7.0...v0.7.1) (2021-06-17)
 
 
