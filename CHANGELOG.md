@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/serverless-plus/cli/compare/v0.7.0...v0.7.1) (2021-06-17)
+
+
+### Bug Fixes
+
+* support sls yml override ([#13](https://github.com/serverless-plus/cli/issues/13)) ([e5c0901](https://github.com/serverless-plus/cli/commit/e5c090117f32cd5d7ed44367be1578329dc934e5))
+
 # [0.7.0](https://github.com/serverless-plus/cli/compare/v0.6.1...v0.7.0) (2021-03-25)
 
 
