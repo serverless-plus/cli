@@ -7,6 +7,7 @@ export interface ParseOptions {
   layerOptionsJson?: string;
   autoCreate?: boolean;
   component?: string;
+  override?: boolean;
   // debug mode
   debug?: boolean;
 }

@@ -166,6 +166,27 @@ inputs:
       });
     });
 
+    test(`should success parse ${filename} file override by slsOptions `, async () => {
+      const res = parse({
+        rootDir: __dirname,
+        input: configFile,
+        override: true,
+        slsOptionsJson:
+          '{"org": "orgDemo","app": "appDemo","stage": "dev","component": "express","name": "expressDemoTest","inputs":{"src":"./","region":"ap-guangzhou"}}',
+      });
+      expect(res).toEqual({
+        org: 'orgDemo',
+        app: 'appDemo',
+        stage: 'dev',
+        component: 'express',
+        name: 'expressDemoTest',
+        inputs: {
+          src: './',
+          region: 'ap-guangzhou',
+        },
+      });
+    });
+
     test(`should success parse ${filename} file using layerOptions`, async () => {
       const res = parse({
         rootDir: __dirname,

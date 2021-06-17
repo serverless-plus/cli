@@ -131,6 +131,7 @@ export function parse({
   slsOptionsJson = '{}',
   layerOptionsJson,
   component,
+  override = false,
   debug = false,
 }: ParseOptions): AnyObject {
   let inputPath = '';
@@ -153,7 +154,9 @@ export function parse({
   }
 
   const { data: parseObj, type } = readAndParse(inputPath, autoCreate);
-  let slsOptions = mergeObject(parseObj, JSON.parse(slsOptionsJson));
+  let slsOptions = override
+    ? JSON.parse(slsOptionsJson)
+    : mergeObject(parseObj, JSON.parse(slsOptionsJson));
 
   slsOptions = generateLayerYaml(rootDir, slsOptions, layerOptionsJson);
 
