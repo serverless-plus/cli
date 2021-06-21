@@ -124,7 +124,7 @@ $ sp faas warm --name=scfdemo
 
 ### bundle
 
-Before using `bundle` command, you can bundle your project with dependencies into one file, so you need not to upload `node_modules` directory.
+Using `bundle` command, you can bundle your project with dependencies into one file, so you need not to upload `node_modules` directory.
 
 ```
 $ sp bundle --input=app.js --file=./sls.js
